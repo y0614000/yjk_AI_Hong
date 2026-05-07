@@ -494,15 +494,28 @@
     }
 
     function saveMessages() {
-      localStorage.setItem(MESSAGE_CACHE_KEY, JSON.stringify(messages));
+      try {
+        localStorage.setItem(MESSAGE_CACHE_KEY, JSON.stringify(messages));
+      } catch (err) {
+        console.warn("saveMessages failed", err);
+      }
     }
 
     function loadDraft() {
-      return localStorage.getItem(DRAFT_CACHE_KEY) || "";
+      try {
+        return localStorage.getItem(DRAFT_CACHE_KEY) || "";
+      } catch (err) {
+        console.warn("loadDraft failed", err);
+        return "";
+      }
     }
 
     function saveDraft(value) {
-      localStorage.setItem(DRAFT_CACHE_KEY, value);
+      try {
+        localStorage.setItem(DRAFT_CACHE_KEY, value);
+      } catch (err) {
+        console.warn("saveDraft failed", err);
+      }
     }
 
     function renderMessages() {
@@ -692,8 +705,10 @@
       return streamState.fullText;
     }
 
-    async function sendMessage(forcedText = "") {
-      const text = (forcedText || input.value).trim();
+    async function sendMessage(forcedText) {
+      const hasForcedText = typeof forcedText === "string" && forcedText.trim() !== "";
+      const textSource = hasForcedText ? forcedText : input.value;
+      const text = textSource.trim();
       if (!text || isStreaming) {
         return;
       }
@@ -771,7 +786,7 @@
       sendMessage(suggestion);
     });
 
-    sendBtn.addEventListener("click", sendMessage);
+    sendBtn.addEventListener("click", () => sendMessage());
     window.addEventListener("resize", autoResize);
 
     renderMessages();
