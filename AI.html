@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI琼崖记忆馆</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f5f5;
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow: hidden;
+    }
+
+    .app {
+      width: min(900px, 100%);
+      height: min(88vh, 900px);
+      max-height: calc(100vh - 40px);
+      max-height: calc(100dvh - 40px);
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #ececec;
+      background: #8b1e1e;
+      color: #fff;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .header p {
+      margin: 8px 0 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .chat {
+      padding: 18px;
+      overflow-y: auto;
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+      align-content: start;
+      gap: 14px;
+      min-height: 0;
+      flex: 1;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .message {
+      display: flex;
+    }
+
+    .message.ai {
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .ai-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid rgba(139, 30, 30, 0.12);
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-top: 2px;
+    }
+
+    .bubble {
+      max-width: 78%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 15px;
+    }
+
+    .message.ai .bubble {
+      background: #fff;
+      border: 1px solid #e7e7e7;
+      color: #222;
+      border-top-left-radius: 4px;
+    }
+
+    .message.user .bubble {
+      background: #8b1e1e;
+      color: #fff;
+      border-top-right-radius: 4px;
+    }
+
+    .streaming-bubble {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .welcome-text {
+      display: block;
+      margin-bottom: 8px;
+      line-height: 1.55;
+    }
+
+    .suggestion-list {
+      display: grid;
+      gap: 8px;
+      justify-items: start;
+    }
+
+    .suggestion-btn {
+      border: 1px solid rgba(139, 30, 30, 0.12);
+      background: rgba(255, 248, 236, 0.96);
+      color: #8b1e1e;
+      border-radius: 999px;
+      padding: 10px 14px;
+      width: auto;
+      min-width: 0;
+      height: auto;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
+      box-shadow: none;
+      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+    }
+
+    .bubble.suggestion-bubble {
+      white-space: normal;
+      padding: 10px 12px;
+    }
+
+    .bubble.loading-bubble {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: normal;
+      padding: 10px 12px;
+      min-width: 60px;
+      min-height: 40px;
+    }
+
+    .suggestion-btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: rgba(139, 30, 30, 0.28);
+      background: #fff7ef;
+    }
+
+    .loading-wave {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .loading-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8b1e1e;
+      opacity: 0.35;
+      animation: waveDot 0.9s ease-in-out infinite;
+    }
+
+    .loading-dot:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .loading-dot:nth-child(3) {
+      animation-delay: 0.24s;
+    }
+
+    .loading {
+      color: #666;
+      font-size: 14px;
+      display: none;
+      padding: 10px 18px 0;
+    }
+
+    .loading.show {
+      display: block;
+    }
+
+    .error {
+      color: #c62828;
+      font-size: 14px;
+      display: none;
+      padding: 10px 18px 0;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    .composer {
+      padding: 14px 18px 18px;
+      background: rgba(255, 248, 236, 0.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 -10px 30px rgba(80, 20, 20, 0.08);
+      border-top: 1px solid rgba(139, 30, 30, 0.08);
+    }
+
+    .composer-box {
+      width: 100%;
+      margin: 0;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    textarea {
+      flex: 1;
+      width: auto;
+      min-height: 48px;
+      height: 48px;
+      max-height: 48px;
+      resize: none;
+      border: 1px solid rgba(139, 30, 30, 0.22);
+      border-radius: 24px;
+      padding: 13px 16px;
+      background: rgba(255, 255, 255, 0.88);
+      color: #2b1a1a;
+      font: inherit;
+      font-size: 15px;
+      line-height: 22px;
+      outline: none;
+      overflow-y: hidden;
+    }
+
+    textarea:focus {
+      border-color: rgba(139, 30, 30, 0.55);
+      box-shadow: 0 0 0 4px rgba(139, 30, 30, 0.08);
+    }
+
+    button {
+      border: 0;
+      width: 48px;
+      min-width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #9b1c1c, #d8a84e);
+      color: #fff;
+      border-radius: 999px;
+      padding: 0;
+      font: inherit;
+      font-size: 20px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(139, 30, 30, 0.24);
+      transition: transform 0.16s ease, opacity 0.16s ease;
+    }
+
+    button:active {
+      transform: scale(0.94);
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    @keyframes waveDot {
+      0%, 100% {
+        transform: translateY(0) scale(0.9);
+        opacity: 0.35;
+      }
+
+      50% {
+        transform: translateY(-4px) scale(1.08);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        display: block;
+        padding: 0;
+        overflow: auto;
+        background: #ffffff;
+      }
+
+      .app {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .header {
+        padding: 16px;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .header p {
+        font-size: 12px;
+      }
+
+      .chat {
+        padding: 14px;
+        gap: 12px;
+        padding-bottom: 118px;
+      }
+
+      .loading {
+        position: fixed;
+        left: 50%;
+        bottom: calc(84px + env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        width: calc(100% - 20px);
+        padding: 0 6px;
+        z-index: 24;
+      }
+
+      .error {
+        position: fixed;
+        left: 50%;
+        bottom: calc(84px + env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        width: calc(100% - 20px);
+        padding: 0 6px;
+        z-index: 24;
+      }
+
+      .composer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 12px 14px calc(14px + env(safe-area-inset-bottom));
+        z-index: 20;
+      }
+
+      .composer-box {
+        width: 100%;
+      }
+
+      textarea {
+        height: auto;
+        min-height: 48px;
+        max-height: 120px;
+        overflow-y: auto;
+      }
+
+      button {
+        width: 48px;
+      }
+
+      .bubble {
+        max-width: 90%;
+        font-size: 14px;
+      }
+
+      .ai-avatar {
+        width: 30px;
+        height: 30px;
+      }
+
+      .loading,
+      .error {
+        font-size: 12px;
+      }
+    }
+
+    @media (min-width: 641px) {
+      .app {
+        min-height: 640px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <h1>AI琼崖记忆馆</h1>
+    </div>
+
+    <div class="chat" id="chat"></div>
+
+    <div class="loading" id="loading">正在生成...</div>
+    <div class="error" id="error">生成失败，请稍后重试</div>
+
+    <div class="composer chat-input-bar">
+      <div class="composer-box">
+        <textarea id="input" placeholder="向 AI 琼崖记忆馆提问..."></textarea>
+        <button id="sendBtn" type="button" aria-label="发送" disabled>➤</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DOUBAO_API_KEY = "ark-0ff7d2da-4469-4e07-97d7-3fcc636e8743-062a0";
+    const API_URL = "https://ark.cn-beijing.volces.com/api/v3/responses";
+    const MODEL_NAME = "doubao-seed-1-8-251228";
+    const MESSAGE_CACHE_KEY = "qiongyamemory_chat_messages";
+    const DRAFT_CACHE_KEY = "qiongyamemory_chat_draft";
+
+    const chat = document.getElementById("chat");
+    const input = document.getElementById("input");
+    const sendBtn = document.getElementById("sendBtn");
+    const loading = document.getElementById("loading");
+    const error = document.getElementById("error");
+
+    const defaultMessages = [
+      {
+        role: "assistant",
+        content: "你好，这里是 AI 琼崖记忆馆。你可以试着问我：",
+        suggestions: [
+          "📜 琼崖纵队的核心故事是什么？",
+          "🏛️ 琼崖记忆馆里有哪些珍贵展品？",
+          "🌴 海南红色历史有哪些关键节点？"
+        ]
+      }
+    ];
+
+    let messages = loadMessages();
+    let isStreaming = false;
+
+    function escapeHtml(text) {
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function loadMessages() {
+      try {
+        const raw = localStorage.getItem(MESSAGE_CACHE_KEY);
+        if (!raw) {
+          return [...defaultMessages];
+        }
+
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed) || !parsed.length) {
+          return [...defaultMessages];
+        }
+
+        const normalized = parsed
+          .filter((item) => item && (item.role === "user" || item.role === "assistant") && typeof item.content === "string")
+          .map((item) => ({
+            role: item.role,
+            content: item.content,
+            suggestions: Array.isArray(item.suggestions)
+              ? item.suggestions.filter((suggestion) => typeof suggestion === "string" && suggestion.trim())
+              : []
+          }));
+
+        if (normalized[0] && normalized[0].role === "assistant" && normalized[0].content.includes("你好，这里是 AI 琼崖记忆馆。你可以试着问我")) {
+          normalized[0].suggestions = [...defaultMessages[0].suggestions];
+        }
+
+        return normalized.length ? normalized : [...defaultMessages];
+      } catch (err) {
+        console.error(err);
+        return [...defaultMessages];
+      }
+    }
+
+    function saveMessages() {
+      localStorage.setItem(MESSAGE_CACHE_KEY, JSON.stringify(messages));
+    }
+
+    function loadDraft() {
+      return localStorage.getItem(DRAFT_CACHE_KEY) || "";
+    }
+
+    function saveDraft(value) {
+      localStorage.setItem(DRAFT_CACHE_KEY, value);
+    }
+
+    function renderMessages() {
+      chat.innerHTML = messages.map((message) => `
+        <div class="message ${message.role === "user" ? "user" : "ai"}">
+          ${
+            message.role === "assistant"
+              ? `<img class="ai-avatar" src="./logo.png" alt="AI 琼崖记忆馆头像">`
+              : ""
+          }
+          <div class="bubble${
+            message.role === "assistant" && message.content === "正在生成..."
+              ? " loading-bubble"
+              : ""
+          }${
+            message.role === "assistant" && Array.isArray(message.suggestions) && message.suggestions.length
+              ? " suggestion-bubble"
+              : ""
+          }">${
+            message.role === "assistant" && message.content === "正在生成..."
+              ? `
+                <span class="streaming-bubble">
+                  <span class="loading-wave" aria-hidden="true">
+                    <span class="loading-dot"></span>
+                    <span class="loading-dot"></span>
+                    <span class="loading-dot"></span>
+                  </span>
+                </span>
+              `
+              : message.role === "assistant" && Array.isArray(message.suggestions) && message.suggestions.length
+                ? `<span class="welcome-text">${escapeHtml(message.content)}</span><span class="suggestion-list">${message.suggestions.map((suggestion) => `<button class="suggestion-btn" type="button" data-suggestion="${escapeHtml(suggestion)}">${escapeHtml(suggestion)}</button>`).join("")}</span>`
+              : escapeHtml(message.content)
+          }</div>
+        </div>
+      `).join("");
+
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function setLoading(isLoading) {
+      isStreaming = isLoading;
+      loading.classList.remove("show");
+      sendBtn.disabled = isLoading || !input.value.trim();
+    }
+
+    function setError(show) {
+      error.classList.toggle("show", show);
+    }
+
+    function updateSendState() {
+      sendBtn.disabled = isStreaming || !input.value.trim();
+    }
+
+    function autoResize() {
+      if (window.innerWidth >= 641) {
+        input.style.height = "48px";
+        return;
+      }
+
+      input.style.height = "auto";
+      input.style.height = Math.min(input.scrollHeight, 180) + "px";
+    }
+
+    function buildPrompt() {
+      const transcript = messages.map((message) => {
+        const speaker = message.role === "user" ? "用户" : "AI";
+        return `${speaker}：${message.content}`;
+      }).join("\n\n");
+
+      return [
+        "请继续下面的对话，直接输出下一条 AI 回复。",
+        "保持自然、简洁、清楚。",
+        "",
+        transcript
+      ].join("\n");
+    }
+
+    function handleSseEvents(eventTexts, aiBubble, aiMessageIndex, streamState) {
+      for (const eventText of eventTexts) {
+        if (!eventText.trim()) {
+          continue;
+        }
+
+        const dataLines = eventText
+          .split("\n")
+          .filter((line) => line.startsWith("data:"));
+
+        if (!dataLines.length) {
+          continue;
+        }
+
+        const jsonText = dataLines
+          .map((line) => line.replace(/^data:\s*/, ""))
+          .join("\n")
+          .trim();
+
+        if (!jsonText || jsonText === "[DONE]") {
+          continue;
+        }
+
+        try {
+          const event = JSON.parse(jsonText);
+
+          if (event.type === "response.output_text.delta") {
+            if (!streamState.started) {
+              streamState.started = true;
+              streamState.fullText = "";
+              aiBubble.textContent = "";
+            }
+
+            streamState.fullText += event.delta || "";
+            messages[aiMessageIndex].content = streamState.fullText;
+            aiBubble.textContent = streamState.fullText;
+            chat.scrollTop = chat.scrollHeight;
+          }
+        } catch (err) {
+          console.warn("SSE parse error", err);
+        }
+      }
+    }
+
+    async function askDoubaoStream(message, aiBubble, aiMessageIndex) {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${DOUBAO_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: MODEL_NAME,
+          stream: true,
+          input: [
+            {
+              role: "user",
+              content: [
+                {
+                  type: "input_text",
+                  text: message
+                }
+              ]
+            }
+          ]
+        })
+      });
+
+      if (!res.ok || !res.body) {
+        throw new Error("请求失败");
+      }
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+      const streamState = {
+        fullText: "",
+        started: false
+      };
+
+      aiBubble.innerHTML = `
+        <span class="streaming-bubble">
+          <span class="loading-wave" aria-hidden="true">
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+          </span>
+        </span>
+      `;
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) {
+          break;
+        }
+
+        buffer += decoder.decode(value, { stream: true });
+
+        const events = buffer.split("\n\n");
+        buffer = events.pop() || "";
+        handleSseEvents(events, aiBubble, aiMessageIndex, streamState);
+      }
+
+      buffer += decoder.decode();
+
+      if (buffer.trim()) {
+        handleSseEvents([buffer], aiBubble, aiMessageIndex, streamState);
+      }
+
+      return streamState.fullText;
+    }
+
+    async function sendMessage(forcedText = "") {
+      const text = (forcedText || input.value).trim();
+      if (!text || isStreaming) {
+        return;
+      }
+
+      setError(false);
+      messages.push({
+        role: "user",
+        content: text
+      });
+      saveMessages();
+      const promptText = buildPrompt();
+
+      input.value = "";
+      saveDraft("");
+      autoResize();
+      renderMessages();
+      messages.push({
+        role: "assistant",
+        content: "正在生成..."
+      });
+      renderMessages();
+
+      const aiMessageIndex = messages.length - 1;
+      const aiBubble = chat.querySelector(".message:last-child .bubble");
+      setLoading(true);
+
+      try {
+        const reply = await askDoubaoStream(promptText, aiBubble, aiMessageIndex);
+        if (!reply) {
+          throw new Error("empty_response");
+        }
+
+        messages[aiMessageIndex].content = reply;
+        saveMessages();
+        renderMessages();
+      } catch (err) {
+        console.error(err);
+        messages.splice(aiMessageIndex, 1);
+        renderMessages();
+        setError(true);
+      } finally {
+        setLoading(false);
+        updateSendState();
+        input.focus();
+      }
+    }
+
+    input.addEventListener("input", () => {
+      autoResize();
+      saveDraft(input.value);
+      updateSendState();
+      if (error.classList.contains("show")) {
+        setError(false);
+      }
+    });
+
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    });
+
+    chat.addEventListener("click", (event) => {
+      const target = event.target.closest(".suggestion-btn");
+      if (!target) {
+        return;
+      }
+
+      const suggestion = target.dataset.suggestion || "";
+      if (!suggestion) {
+        return;
+      }
+
+      sendMessage(suggestion);
+    });
+
+    sendBtn.addEventListener("click", sendMessage);
+    window.addEventListener("resize", autoResize);
+
+    renderMessages();
+    input.value = loadDraft();
+    autoResize();
+    updateSendState();
+    input.focus();
+  </script>
+</body>
+</html>
