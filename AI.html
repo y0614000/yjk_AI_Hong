@@ -9,70 +9,1116 @@
       box-sizing: border-box;
     }
 
-    html {
-      -webkit-text-size-adjust: 100%;
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      :root {
+        --primary: #8f1d1d;
+        --primary-deep: #6f1414;
+        --primary-soft: #f8eaea;
+        --page-bg: #fbf7ef;
+        --card-bg: #fffdf8;
+        --border: #e8d8c8;
+        --border-strong: #e5cfc0;
+        --text-main: #2b1b1b;
+        --text-muted: #8a6a5a;
+        --gold: #c79a45;
+        --shadow-soft: 0 8px 24px rgba(80, 30, 20, 0.08);
+        --radius-card: 16px;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(199, 154, 69, 0.08), transparent 22%),
+          radial-gradient(circle at bottom right, rgba(143, 29, 29, 0.08), transparent 24%),
+          var(--page-bg);
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        overflow: hidden;
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      min-height: 100dvh;
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #f5f5f5;
-      color: #222;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      overflow: hidden;
-    }
+      .app {
+        width: min(1180px, 100%);
+        height: min(88vh, 900px);
+        max-height: calc(100vh - 40px);
+        max-height: calc(100dvh - 40px);
+        background: var(--page-bg);
+        border: 1px solid rgba(111, 20, 20, 0.08);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-soft);
+        display: flex;
+        overflow: hidden;
+        margin: 0 auto;
+      }
 
-    .app {
-      width: min(900px, 100%);
-      height: min(88vh, 900px);
-      max-height: calc(100vh - 40px);
-      max-height: calc(100dvh - 40px);
-      background: #ffffff;
-      border-radius: 18px;
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      margin: 0 auto;
-    }
+      .sidebar {
+        width: 232px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 14px 18px;
+        background:
+          radial-gradient(circle at top, rgba(199, 154, 69, 0.18), transparent 34%),
+          linear-gradient(180deg, var(--primary) 0%, var(--primary-deep) 100%);
+        color: #fff8ec;
+        border-right: 1px solid rgba(255, 248, 235, 0.12);
+      }
 
-    .header {
-      padding: 18px 20px;
-      border-bottom: 1px solid #ececec;
-      background: #8b1e1e;
-      color: #fff;
-      text-align: center;
-    }
+      .sidebar-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 4px 8px 18px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 248, 235, 0.12);
+      }
 
-    .header h1 {
-      margin: 0;
-      font-size: 22px;
-    }
+      .sidebar-logo {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        object-fit: cover;
+        flex-shrink: 0;
+        background: rgba(255, 248, 236, 0.14);
+        box-shadow: 0 8px 18px rgba(32, 8, 8, 0.18);
+        border: 1px solid rgba(255, 248, 235, 0.14);
+      }
 
-    .header p {
-      margin: 8px 0 0;
-      font-size: 13px;
-      opacity: 0.9;
-    }
+      .sidebar-brand-text {
+        min-width: 0;
+      }
 
-    .chat {
-      padding: 18px;
-      overflow-y: auto;
-      background: #fafafa;
-      display: flex;
-      flex-direction: column;
-      align-content: start;
-      gap: 14px;
-      min-height: 0;
-      flex: 1;
-      overscroll-behavior: contain;
-      -webkit-overflow-scrolling: touch;
-    }
+      .sidebar-brand-title {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .sidebar-brand-subtitle {
+        margin: 6px 0 0;
+        color: rgba(255, 248, 236, 0.66);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .nav-item {
+        position: relative;
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 12px 18px;
+        border: 1px solid rgba(255, 248, 235, 0.03);
+        border-radius: var(--radius-card);
+        background: rgba(255, 248, 235, 0.02);
+        color: rgba(255, 248, 236, 0.8);
+        box-shadow: none;
+        font-size: 15px;
+        font-weight: 600;
+        transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+      }
+
+      .nav-item:hover {
+        background: rgba(255, 248, 235, 0.08);
+        border-color: rgba(255, 248, 235, 0.08);
+        color: #fff8ec;
+      }
+
+      .nav-item.active {
+        background: rgba(255, 248, 235, 0.16);
+        border-color: rgba(255, 248, 235, 0.12);
+        color: #fff8ec;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+
+      .nav-label {
+        white-space: nowrap;
+      }
+
+      .main {
+        flex: 1;
+        min-width: 0;
+        background: var(--page-bg);
+        display: flex;
+      }
+
+      .panel {
+        display: none;
+        width: 100%;
+        min-width: 0;
+        min-height: 0;
+      }
+
+      .panel.active {
+        display: flex;
+      }
+
+      .chat-panel {
+        flex-direction: column;
+      }
+
+      .placeholder-panel.active {
+        display: grid;
+        place-items: center;
+        padding: 28px;
+        background:
+          radial-gradient(circle at top right, rgba(143, 29, 29, 0.08), transparent 32%),
+          linear-gradient(180deg, var(--page-bg), #f6efe3);
+      }
+
+      .placeholder-card {
+        width: min(540px, 100%);
+        padding: 30px 28px;
+        border-radius: var(--radius-card);
+        border: 1px solid var(--border);
+        background:
+          linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(252, 246, 235, 0.98)),
+          repeating-linear-gradient(
+            0deg,
+            rgba(143, 29, 29, 0.03) 0 1px,
+            transparent 1px 30px
+          );
+        box-shadow: var(--shadow-soft);
+        color: var(--text-main);
+      }
+
+      .placeholder-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(143, 29, 29, 0.08);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .placeholder-eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #d8a84e, var(--gold));
+      }
+
+      .placeholder-card h2 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 34px;
+        line-height: 1.18;
+      }
+
+      .placeholder-card p {
+        margin: 12px 0 0;
+        color: var(--text-muted);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .heroes-panel.active {
+        display: block;
+        padding: 28px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        background:
+          radial-gradient(circle at top right, rgba(143, 29, 29, 0.08), transparent 32%),
+          linear-gradient(180deg, var(--page-bg), #f6efe3);
+      }
+
+      .heroes-shell {
+        width: min(1040px, 100%);
+        margin: 0 auto;
+      }
+
+      .heroes-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .hero-card {
+        position: relative;
+        min-height: 540px;
+        perspective: 1800px;
+        border-radius: 24px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .hero-card-shell {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: inherit;
+        border-radius: inherit;
+        transition: transform 0.24s ease, box-shadow 0.24s ease;
+        will-change: transform;
+      }
+
+      .hero-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: inherit;
+        border-radius: inherit;
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.22, 0.7, 0.2, 1);
+        will-change: transform;
+      }
+
+      .hero-card.is-flipped .hero-card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .hero-card-face {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        border-radius: inherit;
+        overflow: hidden;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border: 1px solid var(--border);
+        background: linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(252, 246, 235, 0.98));
+        box-shadow: 0 8px 24px rgba(80, 30, 20, 0.08);
+      }
+
+      .hero-card-front::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 120px;
+        background: linear-gradient(180deg, rgba(255, 248, 235, 0), rgba(255, 248, 235, 0.78));
+        pointer-events: none;
+      }
+
+      .hero-card-back {
+        transform: rotateY(180deg);
+        padding: 20px 18px 18px;
+        background:
+          radial-gradient(circle at top right, rgba(199, 154, 69, 0.14), transparent 32%),
+          radial-gradient(circle at bottom left, rgba(143, 29, 29, 0.08), transparent 28%),
+          repeating-linear-gradient(
+            135deg,
+            rgba(143, 29, 29, 0.035) 0 2px,
+            transparent 2px 18px
+          ),
+          linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(248, 239, 225, 0.98));
+      }
+
+      .hero-card-back::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at 18% 20%, rgba(199, 154, 69, 0.12), transparent 20%),
+          radial-gradient(circle at 84% 14%, rgba(143, 29, 29, 0.08), transparent 18%),
+          repeating-linear-gradient(
+            0deg,
+            rgba(113, 72, 42, 0.04) 0 1px,
+            transparent 1px 28px
+          );
+        opacity: 0.8;
+      }
+
+      .hero-card:focus-visible .hero-card-shell {
+        box-shadow:
+          0 0 0 3px rgba(199, 154, 69, 0.24),
+          0 16px 34px rgba(80, 30, 20, 0.14);
+      }
+
+      .hero-card.touch-bump .hero-card-shell {
+        transform: scale(0.985);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .hero-card:hover .hero-card-shell {
+          transform: translateY(-4px) scale(1.018);
+          box-shadow: 0 18px 36px rgba(80, 30, 20, 0.14);
+        }
+
+        .hero-card:hover .hero-card-inner {
+          transform: rotateY(180deg);
+        }
+      }
+
+      .hero-card-media {
+        position: relative;
+        flex: 1;
+        min-height: 338px;
+        padding: 18px 18px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-card-media-frame {
+        width: 100%;
+        height: 100%;
+        min-height: 320px;
+        border-radius: 18px;
+        border: 1px solid rgba(232, 216, 200, 0.8);
+        background:
+          linear-gradient(180deg, rgba(255, 250, 242, 0.96), rgba(247, 236, 218, 0.9));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+      }
+
+      .hero-card-media img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+
+      .hero-card-caption {
+        position: relative;
+        padding: 18px 18px 22px;
+        display: grid;
+        gap: 10px;
+        z-index: 1;
+      }
+
+      .hero-card-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(143, 29, 29, 0.08);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-card-kicker::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #e1bb70, var(--gold));
+      }
+
+      .hero-card-caption h3 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 24px;
+        line-height: 1.3;
+      }
+
+      .hero-card-caption p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .hero-card-back-head,
+      .hero-card-back-copy,
+      .hero-card-back-hint {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-card-back-head {
+        text-align: left;
+      }
+
+      .hero-card-back-head h3 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 24px;
+        line-height: 1.2;
+      }
+
+      .hero-card-back-head p {
+        margin: 8px 0 0;
+        color: var(--text-muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .hero-card-back-copy {
+        flex: 1;
+        min-height: 0;
+        margin-top: 16px;
+        padding-right: 6px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      }
+
+      .hero-card-back-copy::-webkit-scrollbar {
+        display: none;
+      }
+
+      .hero-card-back-copy section {
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+        border-bottom: 1px dashed rgba(143, 29, 29, 0.16);
+      }
+
+      .hero-card-back-copy section:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .hero-card-back-copy h4 {
+        margin: 0 0 10px;
+        color: var(--primary);
+        font-size: 15px;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-card-back-copy p {
+        margin: 0;
+        color: #46312b;
+        font-size: 14px;
+        line-height: 1.95;
+      }
+
+      .hero-card-back-copy p + p {
+        margin-top: 12px;
+      }
+
+      .hero-card-back-hint {
+        margin-top: 14px;
+        color: rgba(138, 106, 90, 0.88);
+        font-size: 12px;
+        letter-spacing: 0.04em;
+      }
+
+      .map-panel.active {
+        display: block;
+        padding: 28px;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        background:
+          radial-gradient(circle at top right, rgba(143, 29, 29, 0.08), transparent 32%),
+          linear-gradient(180deg, var(--page-bg), #f6efe3);
+      }
+
+      .map-shell {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        display: grid;
+        gap: 22px;
+      }
+
+      .map-head {
+        width: min(760px, 100%);
+        display: grid;
+        gap: 12px;
+      }
+
+      .map-head h2 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 40px;
+        line-height: 1.08;
+      }
+
+      .map-head p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .map-timeline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .map-stage-btn {
+        display: inline-grid;
+        gap: 4px;
+        padding: 12px 14px;
+        border-radius: 18px;
+        border: 1px solid rgba(143, 29, 29, 0.12);
+        background: rgba(255, 253, 248, 0.76);
+        color: var(--text-main);
+        text-align: left;
+        box-shadow: 0 8px 20px rgba(80, 30, 20, 0.06);
+        transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .map-stage-btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(199, 154, 69, 0.42);
+        background: rgba(255, 253, 248, 0.98);
+      }
+
+      .map-stage-btn.active {
+        border-color: rgba(143, 29, 29, 0.2);
+        background:
+          linear-gradient(180deg, rgba(143, 29, 29, 0.08), rgba(199, 154, 69, 0.1)),
+          rgba(255, 253, 248, 0.98);
+        box-shadow:
+          0 12px 24px rgba(80, 30, 20, 0.08),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      }
+
+      .map-stage-btn-label {
+        color: var(--primary);
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .map-stage-btn-years {
+        color: var(--text-muted);
+        font-size: 12px;
+        letter-spacing: 0.04em;
+      }
+
+      .map-workbench {
+        display: grid;
+        grid-template-columns: minmax(0, 1.22fr) minmax(320px, 0.88fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .map-stage {
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        padding: 22px;
+        background:
+          radial-gradient(circle at top left, rgba(199, 154, 69, 0.12), transparent 28%),
+          linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(250, 244, 233, 0.98));
+        box-shadow: var(--shadow-soft);
+      }
+
+      .map-stage-copy {
+        display: grid;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .map-stage-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(143, 29, 29, 0.08);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .map-stage-badge::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #e1bb70, var(--gold));
+      }
+
+      .map-stage-title {
+        margin: 0;
+        color: var(--primary);
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+      .map-stage-summary {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .map-stage-stops {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .map-stage-stop {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(199, 154, 69, 0.28);
+        background: rgba(255, 248, 235, 0.82);
+        color: #6d4530;
+        font-size: 12px;
+        letter-spacing: 0.03em;
+      }
+
+      .map-canvas {
+        position: relative;
+        aspect-ratio: 1.06 / 1;
+        border-radius: 22px;
+        border: 1px solid rgba(232, 216, 200, 0.94);
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 20% 16%, rgba(199, 154, 69, 0.18), transparent 20%),
+          radial-gradient(circle at 80% 22%, rgba(143, 29, 29, 0.1), transparent 18%),
+          linear-gradient(180deg, rgba(255, 251, 244, 0.98), rgba(244, 232, 212, 0.94));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+      }
+
+      .map-canvas::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          repeating-linear-gradient(
+            0deg,
+            rgba(122, 87, 42, 0.04) 0 1px,
+            transparent 1px 26px
+          ),
+          radial-gradient(circle at bottom left, rgba(143, 29, 29, 0.06), transparent 22%);
+      }
+
+      .map-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .map-island {
+        fill: url(#mapIslandFill);
+        stroke: rgba(145, 85, 50, 0.34);
+        stroke-width: 0.6;
+      }
+
+      .map-island-shadow {
+        fill: rgba(143, 29, 29, 0.08);
+      }
+
+      .map-coastline {
+        fill: none;
+        stroke: rgba(161, 112, 72, 0.24);
+        stroke-width: 0.5;
+        stroke-dasharray: 1 2;
+      }
+
+      .map-route-glow,
+      .map-route-line {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .map-route-glow {
+        stroke: rgba(199, 154, 69, 0.24);
+        stroke-width: 3.8;
+        filter: blur(0.7px);
+        animation: mapGlowPulse 2.6s ease-in-out infinite;
+      }
+
+      .map-route-line {
+        stroke: url(#mapRouteStroke);
+        stroke-width: 1.7;
+        stroke-dasharray: 2.4 1.6;
+        animation: routeShimmer 5.4s linear infinite;
+      }
+
+      .map-route-dot {
+        fill: #fff8ec;
+        stroke: rgba(155, 34, 34, 0.72);
+        stroke-width: 0.45;
+      }
+
+      .map-route-dot.is-current {
+        fill: var(--gold);
+        stroke: rgba(143, 29, 29, 0.95);
+      }
+
+      .map-points {
+        position: absolute;
+        inset: 0;
+      }
+
+      .map-point {
+        position: absolute;
+        display: grid;
+        justify-items: center;
+        gap: 8px;
+        transform: translate(-50%, -50%);
+        border: 0;
+        background: transparent;
+        padding: 0;
+        color: inherit;
+        transition: transform 0.18s ease, opacity 0.18s ease;
+      }
+
+      .map-point:hover {
+        transform: translate(-50%, -50%) scale(1.04);
+      }
+
+      .map-point-core {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #f4c86c, #c79a45);
+        box-shadow:
+          0 0 0 5px rgba(199, 154, 69, 0.16),
+          0 10px 18px rgba(111, 20, 20, 0.14);
+        border: 1px solid rgba(143, 29, 29, 0.3);
+      }
+
+      .map-point-label {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 253, 248, 0.95);
+        border: 1px solid rgba(232, 216, 200, 0.96);
+        color: #663b2d;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1;
+        box-shadow: 0 8px 18px rgba(80, 30, 20, 0.08);
+        white-space: nowrap;
+        transition: opacity 0.18s ease, transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+      }
+
+      .map-point.is-muted {
+        opacity: 0.38;
+      }
+
+      .map-point.is-muted .map-point-label {
+        opacity: 0;
+        transform: translateY(-2px);
+      }
+
+      .map-point.is-active .map-point-core {
+        transform: scale(1.18);
+        box-shadow:
+          0 0 0 8px rgba(199, 154, 69, 0.18),
+          0 14px 24px rgba(111, 20, 20, 0.18);
+      }
+
+      .map-point.is-active .map-point-label {
+        background: linear-gradient(135deg, rgba(155, 34, 34, 0.96), rgba(199, 154, 69, 0.92));
+        border-color: transparent;
+        color: #fff8ec;
+      }
+
+      .map-point.is-stage .map-point-label {
+        opacity: 1;
+      }
+
+      .map-canvas-stamp {
+        position: absolute;
+        right: 18px;
+        bottom: 16px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: rgba(54, 18, 18, 0.62);
+        color: #ffe2aa;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        box-shadow: 0 10px 24px rgba(20, 8, 8, 0.16);
+      }
+
+      .map-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 16px;
+        color: var(--text-muted);
+        font-size: 12px;
+      }
+
+      .map-legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .map-legend-line,
+      .map-legend-dot {
+        display: inline-block;
+        flex-shrink: 0;
+      }
+
+      .map-legend-line {
+        width: 20px;
+        height: 0;
+        border-top: 2px dashed rgba(199, 154, 69, 0.88);
+      }
+
+      .map-legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #f4c86c, #c79a45);
+        box-shadow: 0 0 0 4px rgba(199, 154, 69, 0.16);
+      }
+
+      .map-card {
+        position: sticky;
+        top: 0;
+        align-self: start;
+        display: grid;
+        gap: 16px;
+        padding: 22px;
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        background:
+          radial-gradient(circle at top right, rgba(199, 154, 69, 0.14), transparent 26%),
+          linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(249, 242, 228, 0.98));
+        box-shadow: var(--shadow-soft);
+        max-height: calc(100dvh - 96px);
+        overflow-y: auto;
+        scrollbar-width: none;
+      }
+
+      .map-card::-webkit-scrollbar {
+        display: none;
+      }
+
+      .map-card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .map-card-region {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(143, 29, 29, 0.08);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .map-card-region::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #e1bb70, var(--gold));
+      }
+
+      .map-card-period {
+        color: #8b664d;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .map-card h3 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 30px;
+        line-height: 1.15;
+      }
+
+      .map-card-summary {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.8;
+      }
+
+      .map-keywords {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .map-keyword {
+        padding: 7px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(199, 154, 69, 0.28);
+        background: rgba(255, 248, 235, 0.84);
+        color: #6f4531;
+        font-size: 13px;
+      }
+
+      .map-card-block {
+        padding: 16px 16px 18px;
+        border-radius: 18px;
+        border: 1px solid rgba(232, 216, 200, 0.92);
+        background: rgba(255, 253, 248, 0.72);
+      }
+
+      .map-card-block h4 {
+        margin: 0 0 10px;
+        color: var(--primary);
+        font-size: 14px;
+        letter-spacing: 0.08em;
+      }
+
+      .map-card-block p {
+        margin: 0;
+        color: #49332b;
+        font-size: 15px;
+        line-height: 1.9;
+        font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+      }
+
+      .map-chat-btn {
+        width: 100%;
+        min-height: 48px;
+        border-radius: 16px;
+        border: 0;
+        background: linear-gradient(135deg, #9b2222, #c79a45);
+        color: #fff8ec;
+        font-size: 15px;
+        font-weight: 700;
+        box-shadow: 0 12px 28px rgba(111, 20, 20, 0.16);
+        transition: transform 0.16s ease, box-shadow 0.16s ease;
+      }
+
+      .map-chat-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 30px rgba(111, 20, 20, 0.2);
+      }
+
+      @keyframes routeShimmer {
+        from {
+          stroke-dashoffset: 0;
+        }
+
+        to {
+          stroke-dashoffset: -20;
+        }
+      }
+
+      @keyframes mapGlowPulse {
+        0%, 100% {
+          opacity: 0.44;
+        }
+
+        50% {
+          opacity: 0.9;
+        }
+      }
+
+      .header {
+        position: relative;
+        padding: 14px 26px 15px;
+        border-bottom: 1px solid rgba(232, 216, 200, 0.88);
+        background:
+          linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(249, 243, 231, 0.98));
+        display: grid;
+        gap: 0;
+      }
+
+      .header::after {
+        content: "";
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        bottom: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(199, 154, 69, 0.68) 16%,
+          rgba(199, 154, 69, 0.68) 84%,
+          transparent
+        );
+      }
+
+      .header-plaque {
+        width: auto;
+        margin: 0;
+        padding: 2px 0 2px 16px;
+        border-radius: 0;
+        border: 0;
+        background: transparent;
+        color: var(--text-main);
+        text-align: left;
+        box-shadow: none;
+        position: relative;
+        overflow: visible;
+      }
+
+      .header-plaque::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 2px;
+        bottom: 2px;
+        width: 3px;
+        border-radius: 999px;
+        background: linear-gradient(180deg, #e1bb70, var(--gold));
+        box-shadow: 0 0 12px rgba(199, 154, 69, 0.18);
+      }
+
+      .header h1 {
+        position: relative;
+        margin: 0;
+        color: var(--primary);
+        font-size: 28px;
+        letter-spacing: 0.02em;
+        line-height: 1.16;
+      }
+
+      .header p {
+        position: relative;
+        margin: 6px 0 0;
+        color: var(--text-muted);
+        font-size: 13px;
+        letter-spacing: 0.04em;
+      }
+
+      .chat {
+        padding: 22px 24px;
+        overflow-y: auto;
+        background:
+          radial-gradient(circle at top left, rgba(199, 154, 69, 0.08), transparent 18%),
+          linear-gradient(180deg, var(--page-bg), #f9f3e7);
+        display: flex;
+        flex-direction: column;
+        align-content: start;
+        gap: 18px;
+        min-height: 0;
+        flex: 1;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
 
     .message {
       display: flex;
@@ -87,40 +1133,39 @@
       justify-content: flex-end;
     }
 
-    .ai-avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 999px;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 1px solid rgba(139, 30, 30, 0.12);
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      margin-top: 2px;
-    }
+      .ai-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        box-shadow: var(--shadow-soft);
+        margin-top: 2px;
+      }
 
-    .bubble {
-      max-width: 78%;
-      padding: 12px 14px;
-      border-radius: 14px;
-      line-height: 1.7;
-      white-space: pre-wrap;
-      word-break: break-word;
-      font-size: 15px;
-    }
+      .bubble {
+        max-width: 78%;
+        padding: 12px 14px;
+        border-radius: var(--radius-card);
+        line-height: 1.7;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 15px;
+        box-shadow: var(--shadow-soft);
+      }
 
-    .message.ai .bubble {
-      background: #fff;
-      border: 1px solid #e7e7e7;
-      color: #222;
-      border-top-left-radius: 4px;
-    }
+      .message.ai .bubble {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        color: var(--text-main);
+      }
 
-    .message.user .bubble {
-      background: #8b1e1e;
-      color: #fff;
-      border-top-right-radius: 4px;
-    }
+      .message.user .bubble {
+        background: #9b2222;
+        color: #fff;
+      }
 
     .streaming-bubble {
       display: inline-flex;
@@ -140,13 +1185,13 @@
       justify-items: start;
     }
 
-    .suggestion-btn {
-      border: 1px solid rgba(139, 30, 30, 0.12);
-      background: rgba(255, 248, 236, 0.96);
-      color: #8b1e1e;
-      border-radius: 999px;
-      padding: 10px 14px;
-      width: auto;
+      .suggestion-btn {
+        border: 1px solid var(--border);
+        background: rgba(255, 248, 235, 0.92);
+        color: var(--primary);
+        border-radius: 999px;
+        padding: 10px 14px;
+        width: auto;
       min-width: 0;
       height: auto;
       font-size: 14px;
@@ -171,11 +1216,11 @@
       min-height: 40px;
     }
 
-    .suggestion-btn:hover:not(:disabled) {
-      transform: translateY(-1px);
-      border-color: rgba(139, 30, 30, 0.28);
-      background: #fff7ef;
-    }
+      .suggestion-btn:hover:not(:disabled) {
+        transform: translateY(-1px);
+        border-color: rgba(199, 154, 69, 0.4);
+        background: var(--card-bg);
+      }
 
     .loading-wave {
       display: inline-flex;
@@ -183,14 +1228,14 @@
       gap: 4px;
     }
 
-    .loading-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #8b1e1e;
-      opacity: 0.35;
-      animation: waveDot 0.9s ease-in-out infinite;
-    }
+      .loading-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        opacity: 0.35;
+        animation: waveDot 0.9s ease-in-out infinite;
+      }
 
     .loading-dot:nth-child(2) {
       animation-delay: 0.12s;
@@ -200,37 +1245,377 @@
       animation-delay: 0.24s;
     }
 
-    .loading {
-      color: #666;
-      font-size: 14px;
-      display: none;
-      padding: 10px 18px 0;
-    }
+      .loading {
+        color: var(--text-muted);
+        font-size: 14px;
+        display: none;
+        padding: 10px 18px 0;
+      }
 
     .loading.show {
       display: block;
     }
 
-    .error {
-      color: #c62828;
-      font-size: 14px;
-      display: none;
-      padding: 10px 18px 0;
-    }
+      .error {
+        color: var(--primary);
+        font-size: 14px;
+        display: none;
+        padding: 10px 18px 0;
+      }
 
     .error.show {
       display: block;
     }
 
-    .composer {
-      padding: 14px 18px 18px;
-      background: rgba(255, 248, 236, 0.88);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 -10px 30px rgba(80, 20, 20, 0.08);
-      border-top: 1px solid rgba(139, 30, 30, 0.08);
-      flex-shrink: 0;
+    .fragment-overlay {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(18, 8, 8, 0.68);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+      z-index: 80;
     }
+
+    .fragment-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .fragment-stage {
+      position: relative;
+      width: min(360px, 82vw);
+      min-height: 360px;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 14px;
+    }
+
+    .fragment-overlay.show .fragment-stage {
+      animation: fragmentDropIn 0.82s cubic-bezier(0.2, 0.82, 0.22, 1.06);
+    }
+
+      .fragment-overlay.show-card .fragment-stage {
+        opacity: 0;
+        transform: scale(0.92);
+        pointer-events: none;
+        transition: opacity 0.22s ease, transform 0.22s ease;
+      }
+
+      .fragment-copy {
+        position: relative;
+        z-index: 1;
+        width: min(420px, 92vw);
+        text-align: center;
+        display: grid;
+        gap: 8px;
+      }
+
+      .fragment-title {
+        margin: 0;
+        color: #ffe8b9;
+        font-size: 30px;
+        line-height: 1.18;
+        letter-spacing: 0.03em;
+        text-shadow: 0 8px 24px rgba(30, 10, 10, 0.32);
+      }
+
+      .fragment-subtitle {
+        margin: 0;
+        color: rgba(255, 227, 172, 0.88);
+        font-size: 17px;
+        line-height: 1.5;
+        letter-spacing: 0.08em;
+      }
+
+      .fragment-desc {
+        margin: 0;
+        color: rgba(255, 244, 220, 0.7);
+        font-size: 13px;
+        line-height: 1.6;
+        letter-spacing: 0.04em;
+      }
+
+      .fragment-backglow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(246, 213, 131, 0.34), rgba(246, 213, 131, 0) 70%);
+      transform: translate(-50%, -46%);
+      filter: blur(18px);
+    }
+
+    .fragment-groundglow {
+      position: absolute;
+      left: 50%;
+      bottom: 52px;
+      width: 230px;
+      height: 44px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(235, 187, 66, 0.72), rgba(235, 187, 66, 0) 72%);
+      transform: translateX(-50%);
+      filter: blur(10px);
+    }
+
+    .fragment-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .fragment-particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 244, 201, 1), rgba(233, 183, 73, 0.48) 62%, transparent 72%);
+      box-shadow: 0 0 14px rgba(244, 194, 87, 0.42);
+      animation: sparkle 1.8s ease-in-out infinite;
+    }
+
+    .fragment-particle.p1 {
+      width: 10px;
+      height: 10px;
+      top: 72px;
+      left: 74px;
+    }
+
+    .fragment-particle.p2 {
+      width: 12px;
+      height: 12px;
+      top: 110px;
+      right: 58px;
+      animation-delay: 0.18s;
+    }
+
+    .fragment-particle.p3 {
+      width: 8px;
+      height: 8px;
+      top: 152px;
+      left: 48px;
+      animation-delay: 0.36s;
+    }
+
+    .fragment-particle.p4 {
+      width: 9px;
+      height: 9px;
+      top: 170px;
+      right: 72px;
+      animation-delay: 0.54s;
+    }
+
+    .fragment-particle.p5 {
+      width: 11px;
+      height: 11px;
+      bottom: 112px;
+      left: 92px;
+      animation-delay: 0.72s;
+    }
+
+    .fragment-particle.p6 {
+      width: 7px;
+      height: 7px;
+      bottom: 126px;
+      right: 94px;
+      animation-delay: 0.9s;
+    }
+
+    .fragment-envelope {
+      position: relative;
+      z-index: 1;
+      width: min(260px, 68vw);
+      min-width: 0;
+      height: auto;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      display: block;
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .fragment-envelope:hover {
+      transform: translateY(-2px) scale(1.02);
+      filter: brightness(1.02);
+    }
+
+    .fragment-envelope:active {
+      transform: scale(0.98);
+    }
+
+    .fragment-envelope:disabled {
+      opacity: 1;
+      box-shadow: none;
+      cursor: pointer;
+    }
+
+    .fragment-envelope img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 16px 38px rgba(0, 0, 0, 0.24));
+    }
+
+      .fragment-tip {
+        position: relative;
+        z-index: 1;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(54, 18, 18, 0.58);
+        color: #ffe6b4;
+        font-size: 14px;
+        letter-spacing: 0.06em;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .telegram-card {
+        position: absolute;
+        width: min(560px, calc(100vw - 36px));
+        padding: 26px 24px 24px;
+        border-radius: var(--radius-card);
+      background:
+        url("./xfBgMain.png") center/cover no-repeat,
+        linear-gradient(180deg, rgba(255, 249, 238, 0.98), rgba(243, 231, 204, 0.96)),
+        repeating-linear-gradient(
+          0deg,
+          rgba(122, 87, 42, 0.04) 0 1px,
+          transparent 1px 28px
+        );
+        border: 1px solid var(--border);
+        color: #3a241d;
+        box-shadow:
+          0 18px 36px rgba(80, 30, 20, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.28s ease, transform 0.28s ease;
+      overflow: hidden;
+    }
+
+    .telegram-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top right, rgba(155, 28, 28, 0.08), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(216, 168, 78, 0.1), transparent 28%);
+    }
+
+    .fragment-overlay.show-card .telegram-card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+      .telegram-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      min-width: 38px;
+      height: 38px;
+      border-radius: 999px;
+        background: rgba(143, 29, 29, 0.1);
+        color: var(--primary);
+      font-size: 22px;
+      font-weight: 600;
+      box-shadow: none;
+    }
+
+      .telegram-close:hover {
+        background: rgba(143, 29, 29, 0.16);
+      }
+
+      .telegram-label {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 12px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(143, 29, 29, 0.08);
+        color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+      .telegram-label::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #d8a84e, var(--gold));
+      }
+
+      .telegram-title {
+        position: relative;
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 28px;
+        line-height: 1.2;
+      }
+
+    .telegram-meta {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+      .telegram-chip {
+        padding: 7px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 253, 248, 0.56);
+        color: #6a3527;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .telegram-body {
+        position: relative;
+        margin: 0;
+        padding: 18px 18px 18px 20px;
+        border-radius: var(--radius-card);
+        background: rgba(255, 253, 248, 0.62);
+        border: 1px solid rgba(232, 216, 200, 0.9);
+        color: #39211a;
+        line-height: 1.95;
+        font-size: 15px;
+        white-space: pre-wrap;
+      }
+
+    .telegram-footer {
+      position: relative;
+      margin-top: 14px;
+      color: #8e674c;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+    }
+
+      .composer {
+        padding: 14px 18px 18px;
+        background: rgba(255, 248, 235, 0.95);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 -8px 24px rgba(80, 30, 20, 0.06);
+        border-top: 1px solid rgba(232, 216, 200, 0.9);
+        flex-shrink: 0;
+      }
 
     .composer-box {
       width: 100%;
@@ -240,56 +1625,341 @@
       align-items: center;
     }
 
-    textarea {
-      flex: 1;
-      width: auto;
-      min-height: 48px;
-      height: 48px;
-      max-height: 48px;
-      resize: none;
-      border: 1px solid rgba(139, 30, 30, 0.22);
-      border-radius: 24px;
-      padding: 13px 16px;
-      background: rgba(255, 255, 255, 0.88);
-      color: #2b1a1a;
-      font: inherit;
-      font-size: 15px;
-      line-height: 22px;
-      outline: none;
-      overflow-y: hidden;
-    }
+      textarea {
+        flex: 1;
+        width: auto;
+        min-height: 48px;
+        height: 48px;
+        max-height: 48px;
+        resize: none;
+        border: 1px solid var(--border-strong);
+        border-radius: 24px;
+        padding: 13px 16px;
+        background: rgba(255, 253, 248, 0.98);
+        color: var(--text-main);
+        font: inherit;
+        font-size: 15px;
+        line-height: 22px;
+        outline: none;
+        overflow-y: hidden;
+      }
 
-    textarea:focus {
-      border-color: rgba(139, 30, 30, 0.55);
-      box-shadow: 0 0 0 4px rgba(139, 30, 30, 0.08);
-    }
+      textarea::placeholder {
+        color: var(--text-muted);
+      }
 
-    button {
-      border: 0;
-      width: 48px;
-      min-width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, #9b1c1c, #d8a84e);
-      color: #fff;
-      border-radius: 999px;
-      padding: 0;
-      font: inherit;
-      font-size: 20px;
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(139, 30, 30, 0.24);
-      transition: transform 0.16s ease, opacity 0.16s ease;
-    }
+      textarea:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 4px rgba(199, 154, 69, 0.12);
+      }
 
-    button:active {
-      transform: scale(0.94);
-    }
+      .call-launch-btn,
+        .send-btn {
+          border: 0;
+          width: 48px;
+          min-width: 48px;
+          height: 48px;
+          color: #fff;
+          border-radius: 999px;
+          padding: 0;
+          font: inherit;
+          font-size: 20px;
+          font-weight: 900;
+          cursor: pointer;
+          box-shadow: 0 8px 24px rgba(111, 20, 20, 0.18);
+          transition: transform 0.16s ease, opacity 0.16s ease, background 0.16s ease, color 0.16s ease;
+      }
 
-    button:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
+        .call-launch-btn {
+          background: linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(242, 226, 206, 0.98));
+          color: var(--primary);
+          border: 1px solid rgba(199, 154, 69, 0.42);
+          box-shadow: 0 8px 20px rgba(199, 154, 69, 0.16);
+          font-size: 19px;
+        }
+
+        .send-btn {
+          background: linear-gradient(135deg, #9b2222 0%, #c79a45 100%);
+          border: 1px solid rgba(255, 240, 215, 0.16);
+          box-shadow:
+            0 10px 26px rgba(111, 20, 20, 0.26),
+            inset 0 1px 0 rgba(255, 255, 255, 0.14);
+          filter: saturate(1.04);
+        }
+
+        .call-launch-btn.active {
+          background: linear-gradient(135deg, #9b2222, #c79a45);
+          color: #fff;
+          border-color: transparent;
+        box-shadow: 0 8px 24px rgba(111, 20, 20, 0.2);
+      }
+
+      .call-launch-btn.unsupported {
+        opacity: 0.72;
+      }
+
+        .send-btn:active {
+          transform: scale(0.94);
+        }
+
+      .call-launch-btn:active {
+        transform: scale(0.94);
+      }
+
+      .send-btn:disabled {
+        opacity: 1;
+        cursor: not-allowed;
+        background: linear-gradient(135deg, rgba(244, 230, 204, 0.98), rgba(233, 213, 180, 0.98));
+        color: rgba(143, 29, 29, 0.42);
+        border: 1px solid rgba(199, 154, 69, 0.3);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.7),
+          0 2px 8px rgba(199, 154, 69, 0.08);
+        filter: saturate(0.72);
+      }
+
+      .call-overlay {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgba(24, 10, 10, 0.68);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.24s ease;
+        z-index: 90;
+      }
+
+      .call-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .call-panel {
+        width: min(430px, calc(100vw - 32px));
+        max-height: calc(100dvh - 48px);
+        padding: 26px 24px 22px;
+        border-radius: 24px;
+        background:
+          radial-gradient(circle at top, rgba(199, 154, 69, 0.12), transparent 28%),
+          linear-gradient(180deg, rgba(255, 252, 245, 0.98), rgba(247, 239, 226, 0.98));
+        border: 1px solid rgba(232, 216, 200, 0.98);
+        box-shadow: 0 24px 60px rgba(46, 18, 18, 0.22);
+        color: var(--text-main);
+        text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .call-panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top right, rgba(143, 29, 29, 0.08), transparent 30%),
+          radial-gradient(circle at bottom left, rgba(199, 154, 69, 0.12), transparent 28%);
+        pointer-events: none;
+      }
+
+      .call-topline {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+
+      .call-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(143, 29, 29, 0.08);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .call-eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #e1bb70, var(--gold));
+      }
+
+      .call-mode {
+        color: var(--text-muted);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .call-avatar {
+        position: relative;
+        width: 92px;
+        height: 92px;
+        margin: 0 auto 16px;
+        border-radius: 999px;
+        padding: 7px;
+        background: radial-gradient(circle, rgba(199, 154, 69, 0.26), rgba(199, 154, 69, 0.06));
+        box-shadow: 0 18px 34px rgba(111, 20, 20, 0.12);
+      }
+
+      .call-avatar img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+        border: 2px solid rgba(255, 248, 235, 0.94);
+        background: #fff;
+      }
+
+      .call-title {
+        position: relative;
+        margin: 0;
+        color: var(--primary);
+        font-size: 28px;
+        line-height: 1.15;
+      }
+
+      .call-subtitle {
+        position: relative;
+        margin: 8px 0 0;
+        color: var(--text-muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .call-body {
+        position: relative;
+        display: flex;
+        flex: 1;
+        min-height: 0;
+        flex-direction: column;
+      }
+
+      .call-status {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 42px;
+        margin: 18px auto 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(143, 29, 29, 0.06);
+        color: var(--primary);
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .call-status::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+        box-shadow: 0 0 0 0 rgba(199, 154, 69, 0.45);
+        animation: callPulse 1.4s ease-out infinite;
+      }
+
+      .call-status.muted::before {
+        background: rgba(138, 106, 90, 0.6);
+        box-shadow: none;
+        animation: none;
+      }
+
+      .call-transcript {
+        position: relative;
+        flex: 1;
+        min-height: 140px;
+        margin-top: 8px;
+        padding: 16px 16px 18px;
+        border-radius: var(--radius-card);
+        border: 1px solid var(--border);
+        background: rgba(255, 253, 248, 0.92);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+        color: var(--text-main);
+        font-size: 15px;
+        line-height: 1.75;
+        text-align: left;
+        white-space: pre-wrap;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(199, 154, 69, 0.7) rgba(143, 29, 29, 0.06);
+      }
+
+      .call-transcript::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      .call-transcript::-webkit-scrollbar-track {
+        background: rgba(143, 29, 29, 0.06);
+        border-radius: 999px;
+      }
+
+      .call-transcript::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, rgba(199, 154, 69, 0.92), rgba(155, 34, 34, 0.7));
+        border-radius: 999px;
+      }
+
+      .call-controls {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 18px;
+        flex-shrink: 0;
+      }
+
+      .call-control-btn {
+        min-width: 124px;
+        height: 46px;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(199, 154, 69, 0.28);
+        background: rgba(255, 253, 248, 0.96);
+        color: var(--primary);
+        font-size: 15px;
+        font-weight: 700;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .call-control-btn.muted {
+        background: rgba(138, 106, 90, 0.1);
+        color: var(--text-muted);
+        border-color: rgba(138, 106, 90, 0.16);
+      }
+
+      .call-control-btn.hangup {
+        background: linear-gradient(135deg, #9b2222, #c79a45);
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 10px 24px rgba(111, 20, 20, 0.2);
+      }
+
+      .call-tip {
+        position: relative;
+        margin: 14px 0 0;
+        color: var(--text-muted);
+        font-size: 12px;
+        line-height: 1.65;
+        flex-shrink: 0;
+      }
 
     @keyframes waveDot {
       0%, 100% {
@@ -303,40 +1973,369 @@
       }
     }
 
-    @media (max-width: 640px) {
-      body {
-        display: block;
-        padding: 0;
-        overflow: hidden;
-        background: #ffffff;
+    @keyframes sparkle {
+      0%, 100% {
+        transform: scale(0.82);
+        opacity: 0.3;
       }
 
-      .app {
-        width: 100%;
-        height: 100dvh;
-        min-height: 100dvh;
-        max-height: none;
-        border-radius: 0;
-        box-shadow: none;
+      50% {
+        transform: scale(1.2);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fragmentDropIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-180px) rotate(-12deg) scale(0.82);
       }
 
-      .header {
-        padding: 16px;
+      62% {
+        opacity: 1;
+        transform: translateY(12px) rotate(6deg) scale(1.02);
       }
 
-      .header h1 {
-        font-size: 20px;
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg) scale(1);
       }
+    }
 
-      .header p {
-        font-size: 12px;
-      }
+        @media (max-width: 980px) {
+          .heroes-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
 
-      .chat {
-        padding: 14px;
-        gap: 12px;
-        padding-bottom: 14px;
-      }
+          .hero-card {
+            min-height: 520px;
+          }
+
+          .map-workbench {
+            grid-template-columns: 1fr;
+          }
+
+          .map-card {
+            position: static;
+            max-height: none;
+          }
+        }
+
+        @media (max-width: 640px) {
+          body {
+            display: block;
+            padding: 0;
+            overflow: hidden;
+            background: var(--page-bg);
+          }
+
+        .app {
+          width: 100%;
+          height: 100dvh;
+          min-height: 100dvh;
+          max-height: none;
+          border-radius: 0;
+          box-shadow: none;
+          flex-direction: column;
+        }
+
+        .sidebar {
+            width: 100%;
+            padding: 14px 14px 12px;
+            border-right: 0;
+            border-bottom: 1px solid rgba(255, 248, 235, 0.12);
+            align-items: center;
+          }
+
+        .sidebar-brand {
+          padding: 2px 2px 12px;
+          width: 100%;
+          justify-content: flex-start;
+          text-align: left;
+        }
+
+        .sidebar-logo {
+          width: 42px;
+          height: 42px;
+          border-radius: 14px;
+        }
+
+        .sidebar-brand-title {
+          font-size: 16px;
+        }
+
+        .sidebar-brand-subtitle {
+          font-size: 11px;
+        }
+
+        .sidebar-brand-text {
+          text-align: left;
+        }
+
+        .sidebar-nav {
+          flex-direction: row;
+          justify-content: center;
+          overflow-x: auto;
+          padding-bottom: 2px;
+          scrollbar-width: none;
+        }
+
+        .sidebar-nav::-webkit-scrollbar {
+          display: none;
+        }
+
+          .nav-item {
+            width: auto;
+            flex: 0 0 auto;
+            justify-content: center;
+            padding: 10px 12px;
+            border-radius: var(--radius-card);
+            font-size: 14px;
+            text-align: center;
+          }
+
+        .main {
+          flex: 1;
+          min-height: 0;
+        }
+
+        .panel.active {
+          min-height: 0;
+        }
+
+        .heroes-panel.active {
+          padding: 18px 14px 24px;
+        }
+
+        .map-panel.active {
+          padding: 18px 14px 24px;
+        }
+
+        .map-head {
+          gap: 10px;
+        }
+
+        .map-head h2 {
+          font-size: 30px;
+        }
+
+        .map-head p {
+          font-size: 14px;
+          line-height: 1.75;
+        }
+
+        .map-timeline {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          padding-bottom: 4px;
+          scrollbar-width: none;
+        }
+
+        .map-timeline::-webkit-scrollbar {
+          display: none;
+        }
+
+        .map-stage-btn {
+          min-width: 134px;
+          flex: 0 0 auto;
+        }
+
+        .map-stage {
+          padding: 16px;
+          border-radius: 20px;
+        }
+
+        .map-stage-title {
+          font-size: 22px;
+        }
+
+        .map-stage-summary {
+          font-size: 14px;
+        }
+
+        .map-canvas {
+          aspect-ratio: 1 / 1.04;
+          border-radius: 18px;
+        }
+
+        .map-point-label {
+          font-size: 11px;
+          padding: 5px 8px;
+        }
+
+        .map-point.is-stage .map-point-label,
+        .map-point.is-active .map-point-label {
+          opacity: 1;
+        }
+
+        .map-legend {
+          gap: 10px;
+        }
+
+        .map-card {
+          gap: 14px;
+          padding: 18px;
+          border-radius: 20px;
+        }
+
+        .map-card h3 {
+          font-size: 24px;
+        }
+
+        .map-card-summary,
+        .map-card-block p {
+          font-size: 14px;
+          line-height: 1.8;
+        }
+
+        .heroes-grid {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+
+        .hero-card {
+          min-height: 500px;
+        }
+
+        .hero-card-media {
+          min-height: 290px;
+          padding: 14px 14px 0;
+        }
+
+        .hero-card-media-frame {
+          min-height: 274px;
+          padding: 10px;
+        }
+
+        .hero-card-caption {
+          padding: 16px 16px 18px;
+          gap: 8px;
+        }
+
+        .hero-card-caption h3,
+        .hero-card-back-head h3 {
+          font-size: 21px;
+        }
+
+        .hero-card-caption p,
+        .hero-card-back-head p,
+        .hero-card-back-copy p {
+          font-size: 13px;
+        }
+
+        .hero-card-back {
+          padding: 18px 16px 16px;
+        }
+
+        .hero-card-back-copy {
+          margin-top: 14px;
+        }
+
+        .call-overlay {
+          padding: 12px;
+        }
+
+        .call-panel {
+          width: min(430px, calc(100vw - 24px));
+          max-height: calc(100dvh - 24px);
+          padding: 20px 16px 18px;
+          border-radius: 20px;
+        }
+
+        .call-avatar {
+          width: 78px;
+          height: 78px;
+          margin-bottom: 12px;
+        }
+
+        .call-title {
+          font-size: 24px;
+        }
+
+        .call-subtitle {
+          font-size: 13px;
+        }
+
+        .call-status {
+          margin-top: 16px;
+          font-size: 13px;
+        }
+
+        .call-transcript {
+          min-height: 120px;
+          padding: 14px 14px 16px;
+          font-size: 14px;
+        }
+
+        .call-controls {
+          gap: 10px;
+          margin-top: 14px;
+        }
+
+        .call-control-btn {
+          min-width: 0;
+          flex: 1;
+          height: 44px;
+          padding: 0 14px;
+          font-size: 14px;
+        }
+
+        .call-tip {
+          margin-top: 12px;
+          font-size: 11px;
+        }
+
+        .header {
+          padding: 12px 14px 12px;
+        }
+
+        .chat-panel .header {
+          display: none;
+        }
+
+        .header::after {
+          left: 14px;
+          right: 14px;
+        }
+
+        .header-plaque {
+          width: 100%;
+          max-width: none;
+          padding: 0 0 0 12px;
+        }
+
+        .header h1 {
+          font-size: 22px;
+        }
+
+        .header p {
+          font-size: 12px;
+          margin-top: 4px;
+        }
+
+        .chat {
+          padding: 14px;
+          gap: 14px;
+          padding-bottom: 14px;
+          align-items: stretch;
+          justify-content: flex-start;
+        }
+
+        .message {
+          width: 100%;
+        }
+
+        .message.ai {
+          justify-content: flex-start;
+        }
+
+        .message.ai .bubble {
+          margin-right: auto;
+        }
+
+        .message.user .bubble {
+          margin-left: auto;
+        }
 
       .loading {
         position: static;
@@ -372,9 +2371,9 @@
         overflow-y: auto;
       }
 
-      button {
-        width: 48px;
-      }
+        .send-btn {
+          width: 48px;
+        }
 
       .bubble {
         max-width: 90%;
@@ -390,70 +2389,910 @@
       .error {
         font-size: 12px;
       }
-    }
 
-    @media (min-width: 641px) {
-      .app {
-        min-height: 640px;
+      .fragment-stage {
+        width: min(320px, 84vw);
+        min-height: 320px;
+      }
+
+      .fragment-envelope {
+        width: min(220px, 64vw);
+      }
+
+        .fragment-tip {
+          font-size: 13px;
+        }
+
+        .fragment-copy {
+          gap: 6px;
+        }
+
+        .fragment-title {
+          font-size: 25px;
+        }
+
+        .fragment-subtitle {
+          font-size: 15px;
+        }
+
+        .fragment-desc {
+          font-size: 12px;
+        }
+
+          .telegram-card {
+            padding: 22px 18px 20px;
+            border-radius: var(--radius-card);
+          }
+
+      .telegram-title {
+        font-size: 23px;
+      }
+
+        .telegram-body {
+          font-size: 14px;
+        }
+
+        .placeholder-panel.active {
+          padding: 18px 14px;
+        }
+
+          .placeholder-card {
+            padding: 24px 20px;
+            border-radius: var(--radius-card);
+          }
+
+        .placeholder-card h2 {
+          font-size: 28px;
+        }
+
+        .placeholder-card p {
+          font-size: 15px;
+        }
+      }
+
+        @media (min-width: 641px) {
+          body {
+            padding: 0;
+            overflow: hidden;
+            background: var(--page-bg);
+          }
+
+        .app {
+          width: 100%;
+          height: 100dvh;
+          min-height: 100dvh;
+          max-height: none;
+          border-radius: 0;
+          box-shadow: none;
+        }
+
+        .sidebar {
+          height: 100%;
+        }
+
+        .main {
+          height: 100%;
+        }
+
+        .chat {
+          padding: 22px 28px;
+        }
+
+      .composer {
+        padding: 16px 24px 18px;
       }
     }
   </style>
-</head>
-<body>
-  <div class="app">
-    <div class="header">
-      <h1>AI琼崖记忆馆</h1>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img class="sidebar-logo" src="./logo.png" alt="AI 琼崖记忆馆 logo">
+          <div class="sidebar-brand-text">
+            <h2 class="sidebar-brand-title">AI琼崖记忆馆</h2>
+            <p class="sidebar-brand-subtitle">走近琼崖革命记忆</p>
+          </div>
+        </div>
+
+          <nav class="sidebar-nav" aria-label="左侧导航">
+            <button class="nav-item active" type="button" data-panel="dialog" aria-current="page">
+              <span class="nav-label">对话馆</span>
+            </button>
+            <button class="nav-item" type="button" data-panel="heroes">
+              <span class="nav-label">英雄人物</span>
+            </button>
+            <button class="nav-item" type="button" data-panel="map">
+              <span class="nav-label">历史地图</span>
+            </button>
+          </nav>
+      </aside>
+
+          <main class="main">
+            <section class="panel chat-panel active" data-panel="dialog">
+              <div class="header">
+                <div class="header-plaque">
+                  <h1>AI琼崖记忆馆</h1>
+                  <p>在对话中走近琼崖革命记忆</p>
+                </div>
+            </div>
+
+          <div class="chat" id="chat"></div>
+
+          <div class="loading" id="loading">正在生成...</div>
+          <div class="error" id="error">生成失败，请稍后重试</div>
+
+            <div class="composer chat-input-bar">
+              <div class="composer-box">
+                <textarea id="input" placeholder="向 AI 琼崖记忆馆提问..."></textarea>
+                <button class="call-launch-btn" id="callBtn" type="button" aria-label="电话模式">☎</button>
+                <button class="send-btn" id="sendBtn" type="button" aria-label="发送" disabled>➤</button>
+              </div>
+            </div>
+          </section>
+
+        <section class="panel heroes-panel" data-panel="heroes">
+          <div class="heroes-shell">
+            <div class="heroes-grid">
+              <article class="hero-card" tabindex="0" role="button" aria-pressed="false" aria-label="查看冯白驹人物卡片详情">
+                <div class="hero-card-shell">
+                  <div class="hero-card-inner">
+                    <div class="hero-card-face hero-card-front">
+                      <div class="hero-card-media">
+                        <div class="hero-card-media-frame">
+                          <img src="yx1.png" alt="冯白驹人物卡片">
+                        </div>
+                      </div>
+                      <div class="hero-card-caption">
+                        <h3>冯白驹</h3>
+                        <p>“二十三年红旗不倒”的坚定旗帜</p>
+                      </div>
+                    </div>
+                    <div class="hero-card-face hero-card-back">
+                      <div class="hero-card-back-head">
+                        <h3>冯白驹</h3>
+                        <p>琼崖革命武装与根据地的重要创建者和领导者</p>
+                      </div>
+                      <div class="hero-card-back-copy">
+                        <section>
+                          <h4>人物简介</h4>
+                          <p>冯白驹是琼崖革命武装和根据地的重要创建者与领导者，中国人民解放军高级将领。他长期坚持琼崖武装斗争，在极其艰苦的环境下带领革命队伍顽强奋战，被誉为“琼崖人民的一面旗帜”。他提出并坚持“二十三年红旗不倒”的革命信念，为海南革命保存了宝贵力量。</p>
+                        </section>
+                        <section>
+                          <h4>革命故事</h4>
+                          <p>土地革命战争时期，琼崖革命遭遇严重挫折，大量革命根据地被破坏，革命力量急剧减少。在最困难的时候，冯白驹带领仅剩的革命武装转移到母瑞山深处坚持斗争。山中环境恶劣，粮食极度短缺，战士们只能靠野菜和树根充饥，但冯白驹始终坚定信念，鼓舞大家继续战斗。</p>
+                          <p>为了保存革命火种，他经常亲自深入群众，发动百姓支持革命。敌人多次围剿母瑞山根据地，但冯白驹利用熟悉山地地形的优势，多次成功突围。正是在这种长期坚持下，琼崖革命力量得以保存，并最终迎来了海南解放的胜利。</p>
+                        </section>
+                      </div>
+                      <div class="hero-card-back-hint">移动端点击卡片翻面，再点一次可恢复正面</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="hero-card" tabindex="0" role="button" aria-pressed="false" aria-label="查看王文明人物卡片详情">
+                <div class="hero-card-shell">
+                  <div class="hero-card-inner">
+                    <div class="hero-card-face hero-card-front">
+                      <div class="hero-card-media">
+                        <div class="hero-card-media-frame">
+                          <img src="yx2.png" alt="王文明人物卡片">
+                        </div>
+                      </div>
+                      <div class="hero-card-caption">
+                        <h3>王文明</h3>
+                        <p>琼崖农民运动的重要组织者</p>
+                      </div>
+                    </div>
+                    <div class="hero-card-face hero-card-back">
+                      <div class="hero-card-back-head">
+                        <h3>王文明</h3>
+                        <p>海南早期共产党领导人之一</p>
+                      </div>
+                      <div class="hero-card-back-copy">
+                        <section>
+                          <h4>人物简介</h4>
+                          <p>王文明是海南早期共产党领导人之一，也是琼崖农民运动的重要组织者。他积极传播革命思想，组织农民开展反压迫斗争，为琼崖革命的发展奠定了群众基础。</p>
+                        </section>
+                        <section>
+                          <h4>革命故事</h4>
+                          <p>在革命初期，海南农村贫苦农民长期受到地主压迫，生活十分艰难。王文明深入农村，挨家挨户宣传革命思想，号召农民团结起来争取自己的权益。他经常在夜晚秘密召开农民会议，组织农会和农民武装。</p>
+                          <p>由于革命活动频繁，敌人不断搜捕共产党人。为了躲避搜查，王文明经常白天隐藏、夜晚行动，即使在危险环境下也从未停止革命工作。他带领群众建立革命组织，并推动农民运动迅速发展，为后来的琼崖武装斗争培养了大量骨干力量。</p>
+                        </section>
+                      </div>
+                      <div class="hero-card-back-hint">移动端点击卡片翻面，再点一次可恢复正面</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="hero-card" tabindex="0" role="button" aria-pressed="false" aria-label="查看红色娘子军人物卡片详情">
+                <div class="hero-card-shell">
+                  <div class="hero-card-inner">
+                    <div class="hero-card-face hero-card-front">
+                      <div class="hero-card-media">
+                        <div class="hero-card-media-frame">
+                          <img src="yx3.png" alt="红色娘子军人物卡片">
+                        </div>
+                      </div>
+                      <div class="hero-card-caption">
+                        <h3>红色娘子军</h3>
+                        <p>中国革命史上的巾帼红旗</p>
+                      </div>
+                    </div>
+                    <div class="hero-card-face hero-card-back">
+                      <div class="hero-card-back-head">
+                        <h3>红色娘子军</h3>
+                        <p>琼崖革命的重要象征之一</p>
+                      </div>
+                      <div class="hero-card-back-copy">
+                        <section>
+                          <h4>人物简介</h4>
+                          <p>红色娘子军是中国革命历史上著名的女子革命武装，也是琼崖革命的重要象征之一。她们展现了中国女性勇敢顽强、不怕牺牲的革命精神，被誉为中国妇女革命斗争的一面旗帜。</p>
+                        </section>
+                        <section>
+                          <h4>革命故事</h4>
+                          <p>在革命年代，许多贫苦妇女长期遭受压迫和剥削。红色娘子军成立后，许多年轻女性主动参加革命队伍。她们不仅学习文化知识和军事训练，还积极参与战斗、站岗、侦察和宣传工作。</p>
+                          <p>在一次战斗中，敌军企图突袭革命根据地，红色娘子军战士们冒着枪林弹雨冲向前线，与敌人展开激烈战斗。虽然条件艰苦，但她们始终保持坚定信念。许多女战士为了掩护群众和战友安全转移，不惜牺牲自己的生命。她们英勇无畏的精神，成为中国革命史上的巾帼传奇。</p>
+                        </section>
+                      </div>
+                      <div class="hero-card-back-hint">移动端点击卡片翻面，再点一次可恢复正面</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="hero-card" tabindex="0" role="button" aria-pressed="false" aria-label="查看母瑞山革命根据地军民人物卡片详情">
+                <div class="hero-card-shell">
+                  <div class="hero-card-inner">
+                    <div class="hero-card-face hero-card-front">
+                      <div class="hero-card-media">
+                        <div class="hero-card-media-frame">
+                          <img src="yx4.png" alt="母瑞山革命根据地军民人物卡片">
+                        </div>
+                      </div>
+                      <div class="hero-card-caption">
+                        <h3>母瑞山革命根据地军民</h3>
+                        <p>琼崖革命火种得以延续的摇篮</p>
+                      </div>
+                    </div>
+                    <div class="hero-card-face hero-card-back">
+                      <div class="hero-card-back-head">
+                        <h3>母瑞山革命根据地军民</h3>
+                        <p>军民团结一心，共同守护革命火种</p>
+                      </div>
+                      <div class="hero-card-back-copy">
+                        <section>
+                          <h4>人物简介</h4>
+                          <p>母瑞山革命根据地是琼崖革命的重要战略基地，被誉为“琼崖革命的摇篮”。在长期革命斗争中，母瑞山军民团结一心，共同坚持武装斗争，为保存革命力量作出了巨大贡献。</p>
+                        </section>
+                        <section>
+                          <h4>革命故事</h4>
+                          <p>在敌人疯狂围剿时期，琼崖革命力量被迫转移到母瑞山地区。这里山高林密，环境复杂，为革命队伍提供了天然屏障。然而，根据地长期遭受封锁，粮食和药品极度匮乏。</p>
+                          <p>为了支持革命，附近群众主动承担运输粮食、传递情报和掩护战士的任务。很多村民宁愿自己挨饿，也要把仅有的粮食送给革命队伍。有的群众甚至冒着生命危险帮助伤员转移。</p>
+                          <p>在军民共同努力下，母瑞山根据地成功保存了革命火种。后来，琼崖纵队逐渐壮大，并最终迎来了海南解放的重要胜利。</p>
+                        </section>
+                      </div>
+                      <div class="hero-card-back-hint">移动端点击卡片翻面，再点一次可恢复正面</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="hero-card" tabindex="0" role="button" aria-pressed="false" aria-label="查看杨善集人物卡片详情">
+                <div class="hero-card-shell">
+                  <div class="hero-card-inner">
+                    <div class="hero-card-face hero-card-front">
+                      <div class="hero-card-media">
+                        <div class="hero-card-media-frame">
+                          <img src="yx5.png" alt="杨善集人物卡片">
+                        </div>
+                      </div>
+                      <div class="hero-card-caption">
+                        <h3>杨善集</h3>
+                        <p>海南早期马克思主义传播先驱</p>
+                      </div>
+                    </div>
+                    <div class="hero-card-face hero-card-back">
+                      <div class="hero-card-back-head">
+                        <h3>杨善集</h3>
+                        <p>为琼崖革命播下最早火种的青年先驱</p>
+                      </div>
+                      <div class="hero-card-back-copy">
+                        <section>
+                          <h4>人物简介</h4>
+                          <p>杨善集是海南早期马克思主义传播者和革命先驱之一。他积极宣传革命理论，组织青年学习先进思想，为琼崖革命播下了最早的革命火种。</p>
+                        </section>
+                        <section>
+                          <h4>革命故事</h4>
+                          <p>青年时期的杨善集十分关注国家命运和民族前途。在接触马克思主义思想后，他深受影响，开始积极向身边青年宣传革命理论。他经常组织读书会和秘密学习活动，鼓励青年投身革命事业。</p>
+                          <p>为了传播进步思想，杨善集奔走于学校、乡村和城市之间。他通过演讲、写文章和秘密宣传等方式唤醒群众觉悟。在敌人严密监视下，他依然坚持开展革命活动。</p>
+                          <p>后来，他组织青年学生参与革命运动，培养了一批革命骨干。虽然革命道路充满危险，但杨善集始终坚定信念，为海南革命事业的发展作出了重要贡献。</p>
+                        </section>
+                      </div>
+                      <div class="hero-card-back-hint">移动端点击卡片翻面，再点一次可恢复正面</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+              <article class="hero-card" tabindex="0" role="button" aria-pressed="false" aria-label="查看刘秋菊人物卡片详情">
+                <div class="hero-card-shell">
+                  <div class="hero-card-inner">
+                    <div class="hero-card-face hero-card-front">
+                      <div class="hero-card-media">
+                        <div class="hero-card-media-frame">
+                          <img src="yx6.png" alt="刘秋菊人物卡片">
+                        </div>
+                      </div>
+                      <div class="hero-card-caption">
+                        <h3>刘秋菊</h3>
+                        <p>坚韧机智的革命联络者</p>
+                      </div>
+                    </div>
+                    <div class="hero-card-face hero-card-back">
+                      <div class="hero-card-back-head">
+                        <h3>刘秋菊</h3>
+                        <p>在隐蔽战线上守护革命队伍的女性力量</p>
+                      </div>
+                      <div class="hero-card-back-copy">
+                        <section>
+                          <h4>人物简介</h4>
+                          <p>刘秋菊是琼崖革命时期优秀的女性革命者。她坚定勇敢，长期从事秘密联络、群众发动和情报传递工作，为革命事业作出了重要贡献，展现了革命女性不屈不挠的精神。</p>
+                        </section>
+                        <section>
+                          <h4>革命故事</h4>
+                          <p>革命斗争时期，刘秋菊经常以普通群众身份作掩护，在敌人严密监视下秘密开展工作。她负责传递情报、联络地下党员以及帮助革命队伍获取物资。</p>
+                          <p>有一次，为了及时送出重要情报，她冒着巨大危险穿越敌人封锁线。途中多次遭遇敌军盘查，但她凭借冷静与机智成功完成任务，确保了革命队伍安全转移。</p>
+                          <p>除了秘密工作外，刘秋菊还积极发动妇女群众参与革命，宣传革命思想。她鼓励更多女性走出家庭、支持革命事业。在长期艰苦斗争中，她始终坚定信念，用实际行动展现了革命女性坚强勇敢的精神品质。</p>
+                        </section>
+                      </div>
+                      <div class="hero-card-back-hint">移动端点击卡片翻面，再点一次可恢复正面</div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel map-panel" data-panel="map">
+          <div class="map-shell">
+            <div class="map-head">
+              <div class="placeholder-eyebrow">专题展区</div>
+              <h2>琼崖红色记忆路线图</h2>
+              <p>沿着时间、山林与海岸线，追踪“二十三年红旗不倒”的关键节点。点击地图上的红色据点，翻开属于琼崖革命的档案页。</p>
+            </div>
+
+            <div class="map-timeline" id="mapTimeline" aria-label="历史阶段时间轴"></div>
+
+            <div class="map-workbench">
+              <div class="map-stage">
+                <div class="map-stage-copy">
+                  <div class="map-stage-badge" id="mapStageBadge">阶段</div>
+                  <h3 class="map-stage-title" id="mapStageTitle">革命萌芽</h3>
+                  <p class="map-stage-summary" id="mapStageSummary">时间轴将串联起思想传播、武装创建、母瑞山坚持与海南解放的关键路线。</p>
+                  <div class="map-stage-stops" id="mapStageStops"></div>
+                </div>
+
+                <div class="map-canvas" id="mapCanvas">
+                  <svg class="map-svg" viewBox="0 0 100 100" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="mapIslandFill" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f9edd6"></stop>
+                        <stop offset="52%" stop-color="#eed6a8"></stop>
+                        <stop offset="100%" stop-color="#e4c08d"></stop>
+                      </linearGradient>
+                      <linearGradient id="mapRouteStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#dcb460"></stop>
+                        <stop offset="50%" stop-color="#b12b2b"></stop>
+                        <stop offset="100%" stop-color="#e7c672"></stop>
+                      </linearGradient>
+                    </defs>
+                    <path class="map-island-shadow" d="M28 10 C18 12 11 20 9 31 C8 44 10 57 17 69 C25 82 37 90 51 93 C63 95 75 92 84 85 C91 78 95 68 94 57 C93 43 88 32 80 22 C73 13 61 9 50 10 C42 11 35 8 28 10 Z"></path>
+                    <path class="map-island" d="M30 8 C20 10 12 18 10 29 C8 41 11 54 18 66 C26 79 38 87 50 90 C62 93 74 90 83 83 C91 76 94 66 93 55 C92 42 87 31 78 21 C71 13 60 9 50 10 C42 10 36 7 30 8 Z"></path>
+                    <path class="map-coastline" d="M32 16 C24 19 18 25 17 35 C16 47 19 56 25 65 C31 74 40 80 50 82 C60 84 69 82 76 76 C83 70 86 61 85 51 C84 40 80 31 73 23"></path>
+                    <path class="map-coastline" d="M39 26 C33 31 31 38 32 47 C33 56 38 63 46 67 C55 72 65 71 72 66"></path>
+                    <polyline class="map-route-glow" id="mapRouteGlow" points=""></polyline>
+                    <polyline class="map-route-line" id="mapRouteLine" points=""></polyline>
+                    <g id="mapRouteDots"></g>
+                  </svg>
+
+                  <div class="map-points" id="mapPoints"></div>
+                  <div class="map-canvas-stamp">QIONGYA MEMORY MAP</div>
+                </div>
+
+                <div class="map-legend">
+                  <span class="map-legend-item"><span class="map-legend-line"></span> 本阶段路线</span>
+                  <span class="map-legend-item"><span class="map-legend-dot"></span> 关键据点</span>
+                  <span class="map-legend-item">点击据点可切换档案卡与 AI 讲述入口</span>
+                </div>
+              </div>
+
+              <aside class="map-card" id="mapInfoCard">
+                <div class="map-card-top">
+                  <span class="map-card-region" id="mapPointRegion">区域标签</span>
+                  <span class="map-card-period" id="mapPointPeriod">年代</span>
+                </div>
+                <h3 id="mapPointTitle">海口</h3>
+                <p class="map-card-summary" id="mapPointSummary">地图点位会在这里展开一页简明而有力量的历史档案。</p>
+                <div class="map-keywords" id="mapKeywords"></div>
+                <div class="map-card-block">
+                  <h4>关键事件</h4>
+                  <p id="mapPointEvent">点击左侧地图点位，查看该地点承载的革命故事。</p>
+                </div>
+                <div class="map-card-block">
+                  <h4>精神线索</h4>
+                  <p id="mapPointSpirit">每个点位都会提炼出一条连接琼崖革命与当下理解的精神线索。</p>
+                </div>
+                <button class="map-chat-btn" id="mapAskBtn" type="button">听 AI 讲这里的故事</button>
+              </aside>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
 
-    <div class="chat" id="chat"></div>
-
-    <div class="loading" id="loading">正在生成...</div>
-    <div class="error" id="error">生成失败，请稍后重试</div>
-
-    <div class="composer chat-input-bar">
-      <div class="composer-box">
-        <textarea id="input" placeholder="向 AI 琼崖记忆馆提问..."></textarea>
-        <button id="sendBtn" type="button" aria-label="发送" disabled>➤</button>
+    <div class="fragment-overlay" id="fragmentOverlay" aria-hidden="true">
+      <div class="fragment-stage" id="fragmentStage">
+        <span class="fragment-backglow" aria-hidden="true"></span>
+        <span class="fragment-groundglow" aria-hidden="true"></span>
+        <div class="fragment-particles" aria-hidden="true">
+        <span class="fragment-particle p1"></span>
+        <span class="fragment-particle p2"></span>
+        <span class="fragment-particle p3"></span>
+          <span class="fragment-particle p4"></span>
+          <span class="fragment-particle p5"></span>
+          <span class="fragment-particle p6"></span>
+        </div>
+        <div class="fragment-copy">
+          <h2 class="fragment-title">📜 历史碎片掉落！</h2>
+          <p class="fragment-subtitle">来自母瑞山的一封密信</p>
+          <p class="fragment-desc">一段被尘封的历史记忆正在展开</p>
+        </div>
+        <button class="fragment-envelope" id="fragmentEnvelope" type="button" aria-label="查看秘密电报">
+          <img src="./xinfengBg.png" alt="历史碎片信封">
+        </button>
+        <div class="fragment-tip">点击信封查看</div>
       </div>
-    </div>
-  </div>
 
-  <script>
+        <section class="telegram-card" id="telegramCard" role="dialog" aria-modal="true" aria-labelledby="telegramTitle">
+          <button class="telegram-close" id="telegramClose" type="button" aria-label="关闭">×</button>
+          <div class="telegram-label">秘密电报</div>
+          <h2 class="telegram-title" id="telegramTitle">1940年的秘密电报</h2>
+        <div class="telegram-meta">
+          <span class="telegram-chip" id="telegramMetaPrimary">时间：1940年</span>
+          <span class="telegram-chip" id="telegramMetaSecondary">地点：母瑞山</span>
+        </div>
+      <p class="telegram-body" id="telegramBody">“敌军已向山区推进，企图切断我部与群众联系。
+粮食仅剩三天，弹药也极为紧缺。
+无论环境多么艰难，我们坚决守住根据地，红旗不能倒。”</p>
+          <div class="telegram-footer" id="telegramFooter">档案编号：QY-1940-MRS-07</div>
+        </section>
+    </div>
+
+    <div class="call-overlay" id="callOverlay" aria-hidden="true">
+      <section class="call-panel" role="dialog" aria-modal="true" aria-labelledby="callTitle">
+        <div class="call-topline">
+          <span class="call-eyebrow">电话模式</span>
+          <span class="call-mode">Live Voice</span>
+        </div>
+        <div class="call-avatar">
+          <img src="./logo.png" alt="AI 琼崖记忆馆">
+        </div>
+        <h2 class="call-title" id="callTitle">AI琼崖记忆馆</h2>
+        <p class="call-subtitle">持续聆听你的提问，并自动语音播报回应</p>
+        <div class="call-body">
+          <div class="call-status" id="callStatus">正在建立语音通道...</div>
+          <div class="call-transcript" id="callTranscript">接通后请直接说话，我会在你停顿后自动识别并回复。</div>
+          <div class="call-controls">
+            <button class="call-control-btn" id="callMicBtn" type="button">麦克风已开</button>
+            <button class="call-control-btn hangup" id="callHangupBtn" type="button">挂断通话</button>
+          </div>
+          <p class="call-tip" id="callTip">如果浏览器支持，我会持续监听你的语音；AI 回答会保留文字，并自动播报出来。</p>
+        </div>
+      </section>
+    </div>
+  
+    <script>
     const DOUBAO_API_KEY = "ark-0ff7d2da-4469-4e07-97d7-3fcc636e8743-062a0";
     const API_URL = "https://ark.cn-beijing.volces.com/api/v3/responses";
-    const MODEL_NAME = "doubao-seed-1-8-251228";
-    const MESSAGE_CACHE_KEY = "qiongyamemory_chat_messages";
-    const DRAFT_CACHE_KEY = "qiongyamemory_chat_draft";
+      const MODEL_NAME = "doubao-seed-1-8-251228";
+      const MESSAGE_CACHE_KEY = "qiongyamemory_chat_messages";
+      const DRAFT_CACHE_KEY = "qiongyamemory_chat_draft";
+      const HISTORY_FRAGMENT_CHANCE = 0.34;
+      const HISTORY_FRAGMENT_FORCE_AFTER = 4;
+      const ERROR_DEFAULT_TEXT = "生成失败，请稍后重试";
+      const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+      const VOICE_CALL_SUPPORTED = Boolean(SpeechRecognitionCtor && "speechSynthesis" in window);
 
-    const chat = document.getElementById("chat");
-    const input = document.getElementById("input");
-    const sendBtn = document.getElementById("sendBtn");
-    const loading = document.getElementById("loading");
-    const error = document.getElementById("error");
+        const chat = document.getElementById("chat");
+        const input = document.getElementById("input");
+        const callBtn = document.getElementById("callBtn");
+        const sendBtn = document.getElementById("sendBtn");
+        const loading = document.getElementById("loading");
+        const error = document.getElementById("error");
+        const navItems = document.querySelectorAll(".nav-item");
+        const panels = document.querySelectorAll(".panel");
+        const fragmentOverlay = document.getElementById("fragmentOverlay");
+        const fragmentEnvelope = document.getElementById("fragmentEnvelope");
+        const telegramClose = document.getElementById("telegramClose");
+        const telegramTitle = document.getElementById("telegramTitle");
+        const telegramMetaPrimary = document.getElementById("telegramMetaPrimary");
+        const telegramMetaSecondary = document.getElementById("telegramMetaSecondary");
+        const telegramBody = document.getElementById("telegramBody");
+        const telegramFooter = document.getElementById("telegramFooter");
+        const callOverlay = document.getElementById("callOverlay");
+        const callStatus = document.getElementById("callStatus");
+        const callTranscript = document.getElementById("callTranscript");
+        const callMicBtn = document.getElementById("callMicBtn");
+        const callHangupBtn = document.getElementById("callHangupBtn");
+        const callTip = document.getElementById("callTip");
+        const heroCards = document.querySelectorAll(".hero-card");
+        const heroHoverMedia = window.matchMedia("(hover: hover) and (pointer: fine)");
+        const mapTimeline = document.getElementById("mapTimeline");
+        const mapPoints = document.getElementById("mapPoints");
+        const mapCanvas = document.getElementById("mapCanvas");
+        const mapStageBadge = document.getElementById("mapStageBadge");
+        const mapStageTitle = document.getElementById("mapStageTitle");
+        const mapStageSummary = document.getElementById("mapStageSummary");
+        const mapStageStops = document.getElementById("mapStageStops");
+        const mapRouteGlow = document.getElementById("mapRouteGlow");
+        const mapRouteLine = document.getElementById("mapRouteLine");
+        const mapRouteDots = document.getElementById("mapRouteDots");
+        const mapPointRegion = document.getElementById("mapPointRegion");
+        const mapPointPeriod = document.getElementById("mapPointPeriod");
+        const mapPointTitle = document.getElementById("mapPointTitle");
+        const mapPointSummary = document.getElementById("mapPointSummary");
+        const mapKeywords = document.getElementById("mapKeywords");
+        const mapPointEvent = document.getElementById("mapPointEvent");
+        const mapPointSpirit = document.getElementById("mapPointSpirit");
+        const mapAskBtn = document.getElementById("mapAskBtn");
 
-    const defaultMessages = [
-      {
-        role: "assistant",
-        content: "你好，这里是 AI 琼崖记忆馆。你可以试着问我：",
+      const defaultMessages = [
+        {
+          role: "assistant",
+          content: "你好，这里是 AI 琼崖记忆馆。你可以试着问我：",
         suggestions: [
             "🏛️ 我要跟英雄对话！",
           "📜 琼崖纵队的核心故事是什么？",
           "🌴 海南红色历史有哪些关键节点？"
         ]
-      }
-    ];
+        }
+      ];
 
-    let messages = loadMessages();
-    let isStreaming = false;
+      const MAP_STAGES = [
+        {
+          id: "seed",
+          label: "革命萌芽",
+          years: "1926-1927",
+          title: "新思想点燃琼崖",
+          summary: "从城市学堂到乡村农会，革命思想与群众组织在琼崖岛上悄然扩散，后来的武装斗争由此获得最初的土壤。",
+          pointIds: ["haikou", "dingan"]
+        },
+        {
+          id: "armed",
+          label: "武装创建",
+          years: "1927-1932",
+          title: "群众组织走向武装行动",
+          summary: "农民运动、基层组织与东部武装逐渐串联，琼崖革命从思想发动迈向更直接的斗争形态。",
+          pointIds: ["dingan", "qionghai", "wanning"]
+        },
+        {
+          id: "persistence",
+          label: "母瑞山坚持",
+          years: "1932-1937",
+          title: "深山中的火种不灭",
+          summary: "在最困难的岁月里，母瑞山成为保存核心力量的重要支点。正是这种坚持，让红色火种没有熄灭。",
+          pointIds: ["dingan", "muruishan", "qiongzhong"]
+        },
+        {
+          id: "nofall",
+          label: "红旗不倒",
+          years: "1937-1949",
+          title: "山海之间的长期坚守",
+          summary: "从母瑞山到东部沿海，再到中部山林，琼崖革命力量依托军民协同，在漫长岁月中实践了“二十三年红旗不倒”。",
+          pointIds: ["muruishan", "qionghai", "qiongzhong", "wanning"]
+        },
+        {
+          id: "liberation",
+          label: "海南解放",
+          years: "1950",
+          title: "从坚持走向会师与胜利",
+          summary: "当全岛革命力量与解放进程相互呼应，这条穿过山林与海岸的红色路线，终于迎来胜利的归宿。",
+          pointIds: ["qiongzhong", "haikou", "sanya"]
+        }
+      ];
 
-    function escapeHtml(text) {
-      return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
+      const MAP_LOCATIONS = [
+        {
+          id: "haikou",
+          label: "海口",
+          region: "思想传播",
+          period: "1926-1927",
+          stageId: "seed",
+          x: 34,
+          y: 16,
+          summary: "城市与学堂成为新思想传入琼崖的重要窗口，启蒙与联络在这里率先形成。",
+          event: "进步青年通过演讲、文章、读书会与秘密联络，将革命理念从城市空间向更广阔的社会层面扩散，逐步形成早期传播网络。",
+          spirit: "求索、启蒙、连接。革命并不只从枪声开始，也从一次次觉醒与传播开始。",
+          keywords: ["思想启蒙", "青年传播", "城市联络"],
+          askPrompt: "请以历史讲述者的视角，给我讲讲海口在琼崖革命早期思想传播中的作用。"
+        },
+        {
+          id: "dingan",
+          label: "定安",
+          region: "农运与组织",
+          period: "1927-1928",
+          stageId: "seed",
+          x: 46,
+          y: 24,
+          summary: "农民运动与基层组织在这里扎根，群众力量开始真正聚拢起来。",
+          event: "王文明等革命者深入乡村，组织农会、宣传革命思想、发动群众开展反压迫斗争，培养了早期骨干与基层组织基础。",
+          spirit: "扎根群众、组织动员、从土地与村庄中生长出来的力量，是琼崖革命的根脉。",
+          keywords: ["农民运动", "基层组织", "群众动员"],
+          askPrompt: "请给我讲讲定安在琼崖农民运动和基层组织发展中的意义。"
+        },
+        {
+          id: "qionghai",
+          label: "琼海",
+          region: "东部烽火",
+          period: "1931-1932",
+          stageId: "armed",
+          x: 67,
+          y: 33,
+          summary: "东部武装与红色娘子军的故事，从这里走进了海南革命最鲜明的记忆。",
+          event: "红色娘子军在这里成长为具有象征意义的革命武装力量，她们承担宣传、站岗、训练、战斗等任务，成为琼崖革命历史中极具辨识度的旗帜。",
+          spirit: "勇敢、平等、担当。女性以战士身份进入历史现场，使革命叙事拥有了更深刻的精神张力。",
+          keywords: ["红色娘子军", "东部武装", "巾帼精神"],
+          askPrompt: "请以适合青少年理解的方式，讲讲琼海与红色娘子军的历史故事。"
+        },
+        {
+          id: "wanning",
+          label: "万宁",
+          region: "海岸联络",
+          period: "1931-1940s",
+          stageId: "armed",
+          x: 72,
+          y: 47,
+          summary: "沿海与山区之间的情报、物资与人员往来，在这里形成一条隐秘却重要的支撑线。",
+          event: "革命力量依靠沿海村落与山林通道之间的协作，完成情报传递、粮秣转运和秘密联络，让武装斗争拥有持续运转的后方脉络。",
+          spirit: "协同、机敏、韧性。看不见的联络线，往往撑起最关键的革命生命线。",
+          keywords: ["情报线", "沿海支援", "秘密联络"],
+          askPrompt: "请讲讲万宁在琼崖革命交通联络和物资支援中的作用。"
+        },
+        {
+          id: "muruishan",
+          label: "母瑞山",
+          region: "根据地核心",
+          period: "1932-1937",
+          stageId: "persistence",
+          x: 49,
+          y: 34,
+          summary: "当革命遭遇最严重挫折时，母瑞山成为保存力量与延续信念的核心地带。",
+          event: "冯白驹等率队转入母瑞山，坚持游击斗争。封锁、饥饿、围剿接踵而至，但依托山地环境与群众支持，革命火种最终得以延续。",
+          spirit: "坚忍、信念、保存火种。母瑞山不是单纯的地理坐标，而是一种在绝境中守住方向的象征。",
+          keywords: ["母瑞山", "冯白驹", "保存火种"],
+          askPrompt: "请以庄重而有感染力的方式，讲讲母瑞山为什么被称为琼崖革命的摇篮。"
+        },
+        {
+          id: "qiongzhong",
+          label: "琼中山区",
+          region: "山林游击",
+          period: "1935-1949",
+          stageId: "nofall",
+          x: 48,
+          y: 50,
+          summary: "山林游击与群众支持在中部山区持续交织，构成“红旗不倒”的韧性底色。",
+          event: "军民在中部山林间建立灵活的游击网络，承担粮食运送、伤员转移、情报掩护等任务，支撑革命力量长期存在与转移。",
+          spirit: "军民一心、山海相依、长期坚持。真正的坚守，往往来自一群人日复一日的默默托举。",
+          keywords: ["山林游击", "群众支援", "军民一心"],
+          askPrompt: "请从军民关系的角度，讲讲琼中山区在‘二十三年红旗不倒’中的意义。"
+        },
+        {
+          id: "sanya",
+          label: "崖州·三亚",
+          region: "南线会师",
+          period: "1950",
+          stageId: "liberation",
+          x: 54,
+          y: 79,
+          summary: "南部沿海的战略节点，见证了长期坚持最终走向全岛胜利的历史时刻。",
+          event: "随着解放进程推进，南部沿海与岛内革命力量逐步形成呼应，会师与推进让琼崖革命多年的坚持最终走向胜利收束。",
+          spirit: "会师、胜利、传承。它让人看到，一条长期坚持的路线，终究会抵达历史的回响。",
+          keywords: ["海南解放", "南线会师", "胜利收束"],
+          askPrompt: "请讲讲崖州和三亚在海南解放阶段所象征的历史意义。"
+        }
+      ];
+
+      const mapStageById = Object.fromEntries(MAP_STAGES.map((stage) => [stage.id, stage]));
+      const mapLocationById = Object.fromEntries(MAP_LOCATIONS.map((location) => [location.id, location]));
+
+      const DEFAULT_TELEGRAM_CONTENT = {
+        title: "1940年的秘密电报",
+        metaPrimary: "时间：1940年",
+        metaSecondary: "地点：母瑞山",
+        body: "“敌军已向山区推进，企图切断我部与群众联系。\n粮食仅剩三天，弹药也极为紧缺。\n无论环境多么艰难，我们坚决守住根据地，红旗不能倒。”",
+        footer: "档案编号：QY-1940-MRS-07"
+      };
+
+      let messages = loadMessages();
+      let isStreaming = false;
+      let recognition = null;
+      let recognitionRunning = false;
+      let recognitionStopRequested = false;
+      let callActive = false;
+      let micEnabled = true;
+      let callPendingRequest = false;
+      let aiSpeaking = false;
+      let speechVoices = [];
+      let repliesSinceHistoryFragment = 0;
+      let pendingHistoryFragment = false;
+      let activeMapStageId = "nofall";
+      let activeMapPointId = "muruishan";
+
+      function escapeHtml(text) {
+        return String(text)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#39;");
-    }
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function normalizeInlineText(text) {
+        return String(text || "")
+          .replace(/\s+/g, " ")
+          .replace(/[“”"]/g, "")
+          .trim();
+      }
+
+      function shortenText(text, maxLength) {
+        const normalized = normalizeInlineText(text);
+        if (normalized.length <= maxLength) {
+          return normalized;
+        }
+
+        return `${normalized.slice(0, Math.max(0, maxLength - 1)).trim()}…`;
+      }
+
+      function isMeaningfulUserMessage(text) {
+        const normalized = normalizeInlineText(text).replace(/[。！？!?,，\s]/g, "");
+        const trivialSet = new Set([
+          "好",
+          "好的",
+          "好呀",
+          "好耶",
+          "你好",
+          "你好呀",
+          "嗯",
+          "嗯嗯",
+          "收到",
+          "知道了",
+          "继续",
+          "爷爷啊"
+        ]);
+
+        if (!normalized) {
+          return false;
+        }
+
+        if (trivialSet.has(normalized)) {
+          return false;
+        }
+
+        return normalized.length >= 3;
+      }
+
+      function findLatestExchange() {
+        let latestUserIndex = -1;
+
+        for (let i = messages.length - 1; i >= 0; i -= 1) {
+          if (messages[i]?.role === "user" && isMeaningfulUserMessage(messages[i].content)) {
+            latestUserIndex = i;
+            break;
+          }
+        }
+
+        if (latestUserIndex === -1) {
+          for (let i = messages.length - 1; i >= 0; i -= 1) {
+            if (messages[i]?.role === "user" && normalizeInlineText(messages[i].content)) {
+              latestUserIndex = i;
+              break;
+            }
+          }
+        }
+
+        if (latestUserIndex === -1) {
+          return null;
+        }
+
+        const userText = normalizeInlineText(messages[latestUserIndex].content);
+        let assistantText = "";
+
+        for (let i = latestUserIndex + 1; i < messages.length; i += 1) {
+          if (messages[i]?.role === "assistant" && normalizeInlineText(messages[i].content) && messages[i].content !== "正在生成...") {
+            assistantText = normalizeInlineText(messages[i].content);
+          }
+        }
+
+        if (!assistantText) {
+          for (let i = messages.length - 1; i >= 0; i -= 1) {
+            if (messages[i]?.role === "assistant" && normalizeInlineText(messages[i].content) && messages[i].content !== "正在生成...") {
+              assistantText = normalizeInlineText(messages[i].content);
+              break;
+            }
+          }
+        }
+
+        return {
+          userText,
+          assistantText
+        };
+      }
+
+      function inferTelegramSubject(text) {
+        const combined = normalizeInlineText(text);
+        const topicMap = [
+          { keywords: ["红色娘子军", "娘子军"], subject: "红色娘子军", place: "琼海" },
+          { keywords: ["冯白驹", "白驹"], subject: "冯白驹与琼崖坚持斗争", place: "琼崖根据地" },
+          { keywords: ["母瑞山"], subject: "母瑞山坚持斗争", place: "母瑞山" },
+          { keywords: ["二十三年红旗不倒", "红旗不倒"], subject: "二十三年红旗不倒", place: "琼崖革命根据地" },
+          { keywords: ["琼崖纵队", "纵队"], subject: "琼崖纵队", place: "琼崖山区" },
+          { keywords: ["白沙起义", "黎族", "苗族"], subject: "白沙起义", place: "白沙" },
+          { keywords: ["英雄人物", "英雄", "先辈"], subject: "琼崖革命人物", place: "琼崖革命根据地" },
+          { keywords: ["历史地图", "地图"], subject: "海南红色地图线索", place: "海南全岛" },
+          { keywords: ["历史故事", "故事"], subject: "琼崖革命故事", place: "琼崖革命根据地" },
+          { keywords: ["海南", "琼崖", "红色历史"], subject: "海南红色历史", place: "琼崖革命根据地" }
+        ];
+
+        for (const item of topicMap) {
+          if (item.keywords.some((keyword) => combined.includes(keyword))) {
+            return item;
+          }
+        }
+
+        const fallbackSubject = shortenText(combined, 14) || "琼崖革命记忆";
+        return {
+          subject: fallbackSubject,
+          place: "琼崖革命根据地"
+        };
+      }
+
+      function buildArchiveCode(subject, place) {
+        const seedText = `${subject}|${place}`;
+        let checksum = 0;
+
+        for (const char of seedText) {
+          checksum = (checksum * 31 + char.charCodeAt(0)) % 100000;
+        }
+
+        return `档案编号：QY-MEM-${String(checksum).padStart(5, "0")}`;
+      }
+
+      function buildTelegramContentFromMessages() {
+        const latestExchange = findLatestExchange();
+        if (!latestExchange) {
+          return DEFAULT_TELEGRAM_CONTENT;
+        }
+
+        const combined = `${latestExchange.userText} ${latestExchange.assistantText}`;
+        const inferred = inferTelegramSubject(combined);
+        const questionLine = shortenText(latestExchange.userText, 22) || "最近一轮提问";
+        const answerLine = shortenText(latestExchange.assistantText, 66) || "对话仍在继续整理";
+
+        return {
+          title: `关于${inferred.subject}的秘密电报`,
+          metaPrimary: `主题：${inferred.subject}`,
+          metaSecondary: `线索：${inferred.place}`,
+          body: `“馆内最新问答已指向‘${inferred.subject}’这条线索。\n你刚刚追问的是：${questionLine}。\n综合本轮回应，可整理出这样的历史记忆：${answerLine}。\n如需继续查证，建议沿${inferred.place}及相关人物、事件与精神脉络继续追索。”`,
+          footer: buildArchiveCode(inferred.subject, inferred.place)
+        };
+      }
+
+      function updateTelegramContent() {
+        const content = buildTelegramContentFromMessages();
+        telegramTitle.textContent = content.title;
+        telegramMetaPrimary.textContent = content.metaPrimary;
+        telegramMetaSecondary.textContent = content.metaSecondary;
+        telegramBody.textContent = content.body;
+        telegramFooter.textContent = content.footer;
+      }
 
     function loadMessages() {
       try {
@@ -556,13 +3395,522 @@
       sendBtn.disabled = isLoading || !input.value.trim();
     }
 
-    function setError(show) {
-      error.classList.toggle("show", show);
-    }
+      function setError(show) {
+        error.classList.toggle("show", show);
+      }
 
-    function updateSendState() {
-      sendBtn.disabled = isStreaming || !input.value.trim();
-    }
+      function showError(message = ERROR_DEFAULT_TEXT) {
+        error.textContent = message;
+        setError(true);
+      }
+
+      function setCallStatusText(text, muted = false) {
+        callStatus.textContent = text;
+        callStatus.classList.toggle("muted", muted);
+      }
+
+      function setCallTranscriptText(text) {
+        callTranscript.textContent = text;
+      }
+
+      function updateCallButtons() {
+        callBtn.classList.toggle("active", callActive);
+        callMicBtn.textContent = micEnabled ? "麦克风已开" : "麦克风已关";
+        callMicBtn.classList.toggle("muted", !micEnabled);
+      }
+
+      function syncCallSupportUI() {
+        if (!VOICE_CALL_SUPPORTED) {
+          callBtn.classList.add("unsupported");
+          callBtn.title = "当前浏览器不支持语音通话功能";
+          callTip.textContent = "当前浏览器不支持语音通话功能，请使用最新版 Chrome 或 Edge，并允许麦克风权限。";
+        }
+      }
+
+      function loadSpeechVoices() {
+        speechVoices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+      }
+
+      function pickSpeechVoice() {
+        if (!speechVoices.length) {
+          loadSpeechVoices();
+        }
+
+        return (
+          speechVoices.find((voice) => /zh-CN|zh_CN|Chinese/i.test(`${voice.lang} ${voice.name}`)) ||
+          speechVoices.find((voice) => /zh/i.test(voice.lang || "")) ||
+          null
+        );
+      }
+
+      function stopSpeaking() {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+        aiSpeaking = false;
+      }
+
+      function speakReplyText(text) {
+        return new Promise((resolve) => {
+          if (!callActive || !("speechSynthesis" in window) || !text.trim()) {
+            resolve();
+            return;
+          }
+
+          stopRecognition(true);
+          stopSpeaking();
+          aiSpeaking = true;
+          setCallStatusText("AI 正在讲话...", false);
+          setCallTranscriptText(`AI：${text}`);
+
+          const utterance = new SpeechSynthesisUtterance(text);
+          const voice = pickSpeechVoice();
+          if (voice) {
+            utterance.voice = voice;
+          }
+          utterance.lang = voice?.lang || "zh-CN";
+          utterance.rate = 1;
+          utterance.pitch = 1;
+
+          const finish = () => {
+            aiSpeaking = false;
+            if (!callActive) {
+              resolve();
+              return;
+            }
+
+            if (micEnabled) {
+              setCallStatusText("通话已接通，正在听你说话...", false);
+              startRecognition();
+            } else {
+              setCallStatusText("麦克风已关闭", true);
+            }
+            resolve();
+          };
+
+          utterance.onend = finish;
+          utterance.onerror = finish;
+          window.speechSynthesis.speak(utterance);
+        });
+      }
+
+      function createRecognition() {
+        if (!VOICE_CALL_SUPPORTED) {
+          return null;
+        }
+
+        const instance = new SpeechRecognitionCtor();
+        instance.lang = "zh-CN";
+        instance.continuous = true;
+        instance.interimResults = true;
+
+        instance.onstart = () => {
+          recognitionRunning = true;
+          if (callActive && micEnabled && !callPendingRequest && !aiSpeaking) {
+            setCallStatusText("通话已接通，正在听你说话...", false);
+          }
+        };
+
+        instance.onresult = (event) => {
+          let interimText = "";
+          let finalText = "";
+
+          for (let i = event.resultIndex; i < event.results.length; i += 1) {
+            const transcript = event.results[i][0]?.transcript || "";
+            if (event.results[i].isFinal) {
+              finalText += transcript;
+            } else {
+              interimText += transcript;
+            }
+          }
+
+          const normalizedFinal = finalText.trim();
+          const normalizedInterim = interimText.trim();
+
+          if (normalizedInterim && !normalizedFinal) {
+            setCallStatusText("正在识别你的语音...", false);
+            setCallTranscriptText(`你：${normalizedInterim}`);
+          }
+
+          if (!normalizedFinal || !callActive || !micEnabled || callPendingRequest || aiSpeaking || isStreaming) {
+            return;
+          }
+
+          callPendingRequest = true;
+          stopRecognition(true);
+          setCallStatusText("已识别，正在发送给 AI...", false);
+          setCallTranscriptText(`你：${normalizedFinal}`);
+          sendMessage(normalizedFinal, { speakReply: true, fromVoice: true });
+        };
+
+        instance.onerror = (event) => {
+          recognitionRunning = false;
+
+          if (!callActive) {
+            return;
+          }
+
+          if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+            setCallStatusText("麦克风权限被拒绝", true);
+            setCallTranscriptText("请允许浏览器访问麦克风，然后重新发起语音通话。");
+            return;
+          }
+
+          if (event.error === "no-speech") {
+            setCallStatusText("没有听清，请继续说话...", false);
+            return;
+          }
+
+          setCallStatusText("语音识别出现问题", true);
+          setCallTranscriptText(`语音识别错误：${event.error || "unknown"}`);
+        };
+
+        instance.onend = () => {
+          recognitionRunning = false;
+          const stoppedByUs = recognitionStopRequested;
+          recognitionStopRequested = false;
+
+          if (!callActive || !micEnabled || callPendingRequest || aiSpeaking) {
+            return;
+          }
+
+          if (!stoppedByUs) {
+            window.setTimeout(() => {
+              startRecognition();
+            }, 220);
+          }
+        };
+
+        return instance;
+      }
+
+      function startRecognition() {
+        if (!VOICE_CALL_SUPPORTED || !callActive || !micEnabled || callPendingRequest || aiSpeaking || recognitionRunning) {
+          return;
+        }
+
+        if (!recognition) {
+          recognition = createRecognition();
+        }
+
+        if (!recognition) {
+          return;
+        }
+
+        try {
+          recognitionStopRequested = false;
+          recognition.start();
+        } catch (err) {
+          if (err && err.name !== "InvalidStateError") {
+            console.warn("recognition.start failed", err);
+          }
+        }
+      }
+
+      function stopRecognition(forceStop = false) {
+        recognitionStopRequested = forceStop;
+
+        if (!recognition || !recognitionRunning) {
+          return;
+        }
+
+        try {
+          recognition.stop();
+        } catch (err) {
+          console.warn("recognition.stop failed", err);
+        }
+      }
+
+      function openCallOverlay() {
+        callOverlay.classList.add("show");
+        callOverlay.setAttribute("aria-hidden", "false");
+      }
+
+      function closeCallOverlay() {
+        callOverlay.classList.remove("show");
+        callOverlay.setAttribute("aria-hidden", "true");
+      }
+
+      function endCallMode() {
+        callActive = false;
+        callPendingRequest = false;
+        micEnabled = true;
+        stopRecognition(true);
+        stopSpeaking();
+        closeCallOverlay();
+        if (pendingHistoryFragment) {
+          window.setTimeout(() => {
+            if (!callActive && pendingHistoryFragment) {
+              openHistoryFragment();
+            }
+          }, 180);
+        }
+        updateCallButtons();
+        setCallStatusText("通话已结束", false);
+        setCallTranscriptText("通话已结束。你仍然可以继续使用下方的文字聊天。");
+        input.focus();
+      }
+
+      function startCallMode() {
+        if (!VOICE_CALL_SUPPORTED) {
+          showError("当前浏览器不支持语音通话功能");
+          return;
+        }
+
+        setError(false);
+        callActive = true;
+        callPendingRequest = false;
+        micEnabled = true;
+        updateCallButtons();
+        openCallOverlay();
+        setCallStatusText("正在建立语音通道...", false);
+        setCallTranscriptText("接通后请直接说话，我会在你停顿后自动识别并回复。");
+        callTip.textContent = "保持页面开启并允许麦克风权限。你说完一句后，我会自动识别并把回答语音播报出来。";
+        loadSpeechVoices();
+        startRecognition();
+      }
+
+      function toggleMic() {
+        if (!callActive) {
+          return;
+        }
+
+        micEnabled = !micEnabled;
+        updateCallButtons();
+
+        if (micEnabled) {
+          setCallStatusText("麦克风已开启，正在听你说话...", false);
+          startRecognition();
+        } else {
+          stopRecognition(true);
+          setCallStatusText("麦克风已关闭", true);
+        }
+      }
+
+      function updateSendState() {
+        sendBtn.disabled = isStreaming || !input.value.trim();
+      }
+
+      function resetHeroCards() {
+        heroCards.forEach((card) => {
+          card.classList.remove("is-flipped", "touch-bump");
+          card.setAttribute("aria-pressed", "false");
+        });
+      }
+
+      function isHeroTapMode() {
+        return !heroHoverMedia.matches;
+      }
+
+      function syncHeroCardInteractionMode() {
+        if (!isHeroTapMode()) {
+          resetHeroCards();
+        }
+      }
+
+      function toggleHeroCard(card) {
+        const nextFlippedState = !card.classList.contains("is-flipped");
+
+        heroCards.forEach((otherCard) => {
+          const shouldFlip = otherCard === card ? nextFlippedState : false;
+          otherCard.classList.toggle("is-flipped", shouldFlip);
+          otherCard.setAttribute("aria-pressed", String(shouldFlip));
+        });
+
+        card.classList.remove("touch-bump");
+        void card.offsetWidth;
+        card.classList.add("touch-bump");
+        window.setTimeout(() => {
+          card.classList.remove("touch-bump");
+        }, 220);
+      }
+
+      function renderMapTimeline() {
+        mapTimeline.innerHTML = MAP_STAGES.map((stage) => `
+          <button
+            class="map-stage-btn"
+            type="button"
+            data-stage="${stage.id}"
+            aria-pressed="${stage.id === activeMapStageId ? "true" : "false"}"
+          >
+            <span class="map-stage-btn-label">${escapeHtml(stage.label)}</span>
+            <span class="map-stage-btn-years">${escapeHtml(stage.years)}</span>
+          </button>
+        `).join("");
+      }
+
+      function renderMapPoints() {
+        mapPoints.innerHTML = MAP_LOCATIONS.map((location) => `
+          <button
+            class="map-point"
+            type="button"
+            data-point="${location.id}"
+            style="left:${location.x}%; top:${location.y}%;"
+            aria-label="查看 ${escapeHtml(location.label)} 的历史档案"
+          >
+            <span class="map-point-core" aria-hidden="true"></span>
+            <span class="map-point-label">${escapeHtml(location.label)}</span>
+          </button>
+        `).join("");
+      }
+
+      function updateMapTimelineState() {
+        mapTimeline.querySelectorAll(".map-stage-btn").forEach((button) => {
+          const isActive = button.dataset.stage === activeMapStageId;
+          button.classList.toggle("active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+      }
+
+      function updateMapStageMeta(stage) {
+        mapStageBadge.textContent = `${stage.label} · ${stage.years}`;
+        mapStageTitle.textContent = stage.title;
+        mapStageSummary.textContent = stage.summary;
+        mapStageStops.innerHTML = stage.pointIds.map((pointId) => {
+          const location = mapLocationById[pointId];
+          return `<span class="map-stage-stop">${escapeHtml(location ? location.label : pointId)}</span>`;
+        }).join("");
+      }
+
+      function updateMapRoute(stage) {
+        const routePoints = stage.pointIds
+          .map((pointId) => mapLocationById[pointId])
+          .filter(Boolean)
+          .map((location) => `${location.x},${location.y}`)
+          .join(" ");
+
+        mapRouteGlow.setAttribute("points", routePoints);
+        mapRouteLine.setAttribute("points", routePoints);
+        mapRouteDots.innerHTML = stage.pointIds
+          .map((pointId) => {
+            const location = mapLocationById[pointId];
+            if (!location) {
+              return "";
+            }
+            const dotClass = pointId === activeMapPointId ? "map-route-dot is-current" : "map-route-dot";
+            return `<circle class="${dotClass}" cx="${location.x}" cy="${location.y}" r="${pointId === activeMapPointId ? 1.22 : 0.92}"></circle>`;
+          })
+          .join("");
+      }
+
+      function updateMapPointState(stage) {
+        const stagePointIds = new Set(stage.pointIds);
+
+        mapPoints.querySelectorAll(".map-point").forEach((button) => {
+          const pointId = button.dataset.point || "";
+          const isStagePoint = stagePointIds.has(pointId);
+          const isActive = pointId === activeMapPointId;
+          button.classList.toggle("is-stage", isStagePoint);
+          button.classList.toggle("is-active", isActive);
+          button.classList.toggle("is-muted", !isStagePoint && !isActive);
+        });
+      }
+
+      function updateMapInfoCard(location) {
+        const stage = mapStageById[activeMapStageId];
+        mapPointRegion.textContent = location.region;
+        mapPointPeriod.textContent = `${location.period} · ${stage.label}`;
+        mapPointTitle.textContent = location.label;
+        mapPointSummary.textContent = location.summary;
+        mapPointEvent.textContent = location.event;
+        mapPointSpirit.textContent = location.spirit;
+        mapKeywords.innerHTML = location.keywords
+          .map((keyword) => `<span class="map-keyword">${escapeHtml(keyword)}</span>`)
+          .join("");
+        mapAskBtn.dataset.prompt = location.askPrompt;
+      }
+
+      function setActiveMapStage(stageId, preferredPointId = "") {
+        const stage = mapStageById[stageId] || MAP_STAGES[0];
+        const nextPointId = preferredPointId && stage.pointIds.includes(preferredPointId)
+          ? preferredPointId
+          : stage.pointIds[0];
+        const location = mapLocationById[nextPointId] || mapLocationById[stage.pointIds[0]];
+
+        activeMapStageId = stage.id;
+        activeMapPointId = location.id;
+        updateMapTimelineState();
+        updateMapStageMeta(stage);
+        updateMapRoute(stage);
+        updateMapPointState(stage);
+        updateMapInfoCard(location);
+      }
+
+      function focusMapLocation(pointId) {
+        const location = mapLocationById[pointId];
+        if (!location) {
+          return;
+        }
+
+        const currentStage = mapStageById[activeMapStageId];
+        const nextStageId = currentStage && currentStage.pointIds.includes(location.id)
+          ? currentStage.id
+          : location.stageId;
+
+        setActiveMapStage(nextStageId, location.id);
+      }
+
+      function askMapLocationStory() {
+        const location = mapLocationById[activeMapPointId];
+        if (!location) {
+          return;
+        }
+
+        const prompt = location.askPrompt || `请讲讲${location.label}在琼崖革命中的历史意义。`;
+        setActivePanel("dialog");
+
+        if (isStreaming) {
+          input.value = prompt;
+          saveDraft(prompt);
+          autoResize();
+          updateSendState();
+          input.focus();
+          return;
+        }
+
+        window.setTimeout(() => {
+          sendMessage(prompt);
+        }, 80);
+      }
+
+      function initializeMapModule() {
+        renderMapTimeline();
+        renderMapPoints();
+        setActiveMapStage(activeMapStageId, activeMapPointId);
+      }
+
+      function setActivePanel(panelName) {
+        navItems.forEach((item) => {
+          const isActive = item.dataset.panel === panelName;
+          item.classList.toggle("active", isActive);
+          if (isActive) {
+            item.setAttribute("aria-current", "page");
+          } else {
+            item.removeAttribute("aria-current");
+          }
+        });
+
+        panels.forEach((panel) => {
+          panel.classList.toggle("active", panel.dataset.panel === panelName);
+        });
+
+        if (panelName === "dialog") {
+          requestAnimationFrame(() => {
+            chat.scrollTop = chat.scrollHeight;
+            autoResize();
+            updateSendState();
+            if (!isStreaming) {
+              input.focus();
+            }
+          });
+        } else {
+          input.blur();
+        }
+
+        if (panelName !== "heroes") {
+          resetHeroCards();
+        }
+      }
 
     function autoResize() {
       if (window.innerWidth >= 641) {
@@ -572,6 +3920,48 @@
 
       input.style.height = "auto";
       input.style.height = Math.min(input.scrollHeight, 96) + "px";
+    }
+
+      function openHistoryFragment() {
+        input.blur();
+        pendingHistoryFragment = false;
+        repliesSinceHistoryFragment = 0;
+        updateTelegramContent();
+        fragmentOverlay.classList.add("show");
+        fragmentOverlay.classList.remove("show-card");
+        fragmentOverlay.setAttribute("aria-hidden", "false");
+      }
+
+    function revealTelegramCard() {
+      fragmentOverlay.classList.add("show-card");
+    }
+
+    function closeHistoryFragment() {
+      fragmentOverlay.classList.remove("show", "show-card");
+      fragmentOverlay.setAttribute("aria-hidden", "true");
+    }
+
+    function maybeTriggerHistoryFragment() {
+      if (fragmentOverlay.classList.contains("show")) {
+        return false;
+      }
+
+      repliesSinceHistoryFragment += 1;
+      const hitRandomChance = Math.random() < HISTORY_FRAGMENT_CHANCE;
+      const shouldForceTrigger = repliesSinceHistoryFragment >= HISTORY_FRAGMENT_FORCE_AFTER;
+
+      if (!hitRandomChance && !shouldForceTrigger) {
+        return false;
+      }
+
+      if (callActive) {
+        pendingHistoryFragment = true;
+        repliesSinceHistoryFragment = 0;
+        return true;
+      }
+
+      openHistoryFragment();
+      return true;
     }
 
     function buildPrompt() {
@@ -700,18 +4090,20 @@
       return streamState.fullText;
     }
 
-    async function sendMessage(forcedText) {
-      const hasForcedText = typeof forcedText === "string" && forcedText.trim() !== "";
-      const textSource = hasForcedText ? forcedText : input.value;
-      const text = textSource.trim();
-      if (!text || isStreaming) {
-        return;
-      }
+      async function sendMessage(forcedText, options = {}) {
+        const hasForcedText = typeof forcedText === "string" && forcedText.trim() !== "";
+        const textSource = hasForcedText ? forcedText : input.value;
+        const text = textSource.trim();
+        if (!text || isStreaming) {
+          return;
+        }
 
-      setError(false);
-      messages.push({
-        role: "user",
-        content: text
+        const shouldSpeakReply = Boolean(options.speakReply && callActive);
+
+        setError(false);
+        messages.push({
+          role: "user",
+          content: text
       });
       saveMessages();
       const promptText = buildPrompt();
@@ -729,27 +4121,43 @@
       const aiMessageIndex = messages.length - 1;
       const aiBubble = chat.querySelector(".message:last-child .bubble");
       setLoading(true);
+        let triggeredHistoryFragment = false;
 
-      try {
-        const reply = await askDoubaoStream(promptText, aiBubble, aiMessageIndex);
-        if (!reply) {
+        try {
+          const reply = await askDoubaoStream(promptText, aiBubble, aiMessageIndex);
+          if (!reply) {
           throw new Error("empty_response");
         }
 
-        messages[aiMessageIndex].content = reply;
-        saveMessages();
-        renderMessages();
-      } catch (err) {
-        console.error(err);
-        messages.splice(aiMessageIndex, 1);
-        renderMessages();
-        setError(true);
-      } finally {
-        setLoading(false);
-        updateSendState();
-        input.focus();
+          messages[aiMessageIndex].content = reply;
+          saveMessages();
+          renderMessages();
+          triggeredHistoryFragment = maybeTriggerHistoryFragment();
+          if (shouldSpeakReply) {
+            await speakReplyText(reply);
+          }
+        } catch (err) {
+          console.error(err);
+          messages.splice(aiMessageIndex, 1);
+          renderMessages();
+          if (callActive && options.fromVoice) {
+            setCallStatusText("通话出现异常", true);
+            setCallTranscriptText(ERROR_DEFAULT_TEXT);
+          }
+          showError(ERROR_DEFAULT_TEXT);
+        } finally {
+          callPendingRequest = false;
+          setLoading(false);
+          updateSendState();
+          if (callActive) {
+            if (!aiSpeaking && micEnabled) {
+              startRecognition();
+            }
+          } else if (!triggeredHistoryFragment) {
+            input.focus();
+          }
+        }
       }
-    }
 
     input.addEventListener("input", () => {
       autoResize();
@@ -767,28 +4175,118 @@
       }
     });
 
-    chat.addEventListener("click", (event) => {
-      const target = event.target.closest(".suggestion-btn");
-      if (!target) {
-        return;
-      }
+      chat.addEventListener("click", (event) => {
+        const target = event.target.closest(".suggestion-btn");
+        if (!target) {
+          return;
+        }
 
       const suggestion = target.dataset.suggestion || "";
       if (!suggestion) {
         return;
       }
 
-      sendMessage(suggestion);
-    });
+        sendMessage(suggestion);
+      });
 
-    sendBtn.addEventListener("click", () => sendMessage());
-    window.addEventListener("resize", autoResize);
+      navItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          setActivePanel(item.dataset.panel || "dialog");
+        });
+      });
 
-    renderMessages();
-    input.value = loadDraft();
-    autoResize();
-    updateSendState();
-    input.focus();
+      mapTimeline.addEventListener("click", (event) => {
+        const target = event.target.closest(".map-stage-btn");
+        if (!target) {
+          return;
+        }
+
+        setActiveMapStage(target.dataset.stage || MAP_STAGES[0].id);
+      });
+
+      mapPoints.addEventListener("click", (event) => {
+        const target = event.target.closest(".map-point");
+        if (!target) {
+          return;
+        }
+
+        focusMapLocation(target.dataset.point || "");
+      });
+
+      mapAskBtn.addEventListener("click", askMapLocationStory);
+
+      heroCards.forEach((card) => {
+        card.addEventListener("click", (event) => {
+          if (!isHeroTapMode()) {
+            return;
+          }
+
+          if (card.classList.contains("is-flipped") && event.target.closest(".hero-card-back-copy")) {
+            return;
+          }
+
+          toggleHeroCard(card);
+        });
+
+        card.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") {
+            return;
+          }
+
+          event.preventDefault();
+          toggleHeroCard(card);
+        });
+      });
+
+      fragmentEnvelope.addEventListener("click", revealTelegramCard);
+      telegramClose.addEventListener("click", closeHistoryFragment);
+      fragmentOverlay.addEventListener("click", (event) => {
+        if (event.target === fragmentOverlay) {
+          closeHistoryFragment();
+        }
+      });
+
+      callBtn.addEventListener("click", () => {
+        if (callActive) {
+          endCallMode();
+        } else {
+          startCallMode();
+        }
+      });
+
+      callMicBtn.addEventListener("click", toggleMic);
+      callHangupBtn.addEventListener("click", endCallMode);
+      callOverlay.addEventListener("click", (event) => {
+        if (event.target === callOverlay) {
+          endCallMode();
+        }
+      });
+
+      sendBtn.addEventListener("click", () => sendMessage());
+      window.addEventListener("resize", () => {
+        autoResize();
+        syncHeroCardInteractionMode();
+      });
+      if (typeof heroHoverMedia.addEventListener === "function") {
+        heroHoverMedia.addEventListener("change", syncHeroCardInteractionMode);
+      } else if (typeof heroHoverMedia.addListener === "function") {
+        heroHoverMedia.addListener(syncHeroCardInteractionMode);
+      }
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.addEventListener("voiceschanged", loadSpeechVoices);
+      }
+
+      syncCallSupportUI();
+      syncHeroCardInteractionMode();
+      initializeMapModule();
+      updateCallButtons();
+      loadSpeechVoices();
+      renderMessages();
+      input.value = loadDraft();
+      setActivePanel("dialog");
+      autoResize();
+      updateSendState();
+      input.focus();
   </script>
 </body>
 </html>
