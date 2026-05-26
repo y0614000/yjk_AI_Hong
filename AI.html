@@ -265,6 +265,7 @@
         border-radius: 24px;
         cursor: pointer;
         outline: none;
+        touch-action: pan-y pinch-zoom;
       }
 
       .hero-card-shell {
@@ -275,6 +276,7 @@
         border-radius: inherit;
         transition: transform 0.24s ease, box-shadow 0.24s ease;
         will-change: transform;
+        touch-action: pan-y pinch-zoom;
       }
 
       .hero-card-inner {
@@ -304,6 +306,7 @@
         border: 1px solid var(--border);
         background: linear-gradient(180deg, rgba(255, 253, 248, 0.98), rgba(252, 246, 235, 0.98));
         box-shadow: 0 8px 24px rgba(80, 30, 20, 0.08);
+        touch-action: pan-y pinch-zoom;
       }
 
       .hero-card-front::after {
@@ -478,6 +481,7 @@
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+        touch-action: pan-y pinch-zoom;
       }
 
       .hero-card-back-copy::-webkit-scrollbar {
@@ -2754,7 +2758,7 @@
         <section class="panel map-panel" data-panel="map">
           <div class="map-shell">
             <div class="map-head">
-              <div class="placeholder-eyebrow">专题展区</div>
+              <!-- <div class="placeholder-eyebrow">专题展区</div> -->
               <h2>琼崖红色记忆路线图</h2>
               <p>沿着时间、山林与海岸线，追踪“二十三年红旗不倒”的关键节点。点击地图上的红色据点，翻开属于琼崖革命的档案页。</p>
             </div>
@@ -3125,6 +3129,7 @@
       let pendingHistoryFragment = false;
       let activeMapStageId = "nofall";
       let activeMapPointId = "muruishan";
+      const heroCardTouchState = new WeakMap();
 
       function escapeHtml(text) {
         return String(text)
@@ -3725,6 +3730,56 @@
         }, 220);
       }
 
+      function startHeroCardTouch(card, event) {
+        if (!isHeroTapMode() || event.pointerType === "mouse") {
+          return;
+        }
+
+        heroCardTouchState.set(card, {
+          pointerId: event.pointerId,
+          startX: event.clientX,
+          startY: event.clientY,
+          moved: false
+        });
+      }
+
+      function moveHeroCardTouch(card, event) {
+        const state = heroCardTouchState.get(card);
+        if (!state || state.pointerId !== event.pointerId) {
+          return;
+        }
+
+        if (
+          Math.abs(event.clientX - state.startX) > 10 ||
+          Math.abs(event.clientY - state.startY) > 10
+        ) {
+          state.moved = true;
+        }
+      }
+
+      function endHeroCardTouch(card, event) {
+        const state = heroCardTouchState.get(card);
+        if (!state || state.pointerId !== event.pointerId) {
+          return;
+        }
+
+        heroCardTouchState.delete(card);
+
+        if (state.moved) {
+          return;
+        }
+
+        if (card.classList.contains("is-flipped") && event.target.closest(".hero-card-back-copy")) {
+          return;
+        }
+
+        toggleHeroCard(card);
+      }
+
+      function cancelHeroCardTouch(card) {
+        heroCardTouchState.delete(card);
+      }
+
       function renderMapTimeline() {
         mapTimeline.innerHTML = MAP_STAGES.map((stage) => `
           <button
@@ -4216,17 +4271,35 @@
       mapAskBtn.addEventListener("click", askMapLocationStory);
 
       heroCards.forEach((card) => {
-        card.addEventListener("click", (event) => {
-          if (!isHeroTapMode()) {
-            return;
-          }
+        if ("PointerEvent" in window) {
+          card.addEventListener("pointerdown", (event) => {
+            startHeroCardTouch(card, event);
+          });
 
-          if (card.classList.contains("is-flipped") && event.target.closest(".hero-card-back-copy")) {
-            return;
-          }
+          card.addEventListener("pointermove", (event) => {
+            moveHeroCardTouch(card, event);
+          });
 
-          toggleHeroCard(card);
-        });
+          card.addEventListener("pointerup", (event) => {
+            endHeroCardTouch(card, event);
+          });
+
+          card.addEventListener("pointercancel", () => {
+            cancelHeroCardTouch(card);
+          });
+        } else {
+          card.addEventListener("click", (event) => {
+            if (!isHeroTapMode()) {
+              return;
+            }
+
+            if (card.classList.contains("is-flipped") && event.target.closest(".hero-card-back-copy")) {
+              return;
+            }
+
+            toggleHeroCard(card);
+          });
+        }
 
         card.addEventListener("keydown", (event) => {
           if (event.key !== "Enter" && event.key !== " ") {
